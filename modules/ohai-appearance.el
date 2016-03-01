@@ -63,7 +63,7 @@
 (defun ohai-appearance/dark ()
   (interactive)
   (use-package material-theme)
-  (load-theme 'material)
+  (load-theme 'material t)
 
   (set-face-background 'default "#000")
 
