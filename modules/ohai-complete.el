@@ -52,19 +52,6 @@
   (use-package company-emoji
     :config
     (company-emoji-init))
-  ;; Company's default colours look OK with the light scheme,
-  ;; but hideous with the dark one, so let's pick something nicer.
-  (add-hook
-   'ohai-appearance/dark-hook
-   (lambda ()
-     (set-face-foreground 'company-tooltip "#000")
-     (set-face-background 'company-tooltip "#ddd")
-     (set-face-background 'company-scrollbar-bg "#fff")
-     (set-face-background 'company-scrollbar-fg "#999")
-     (set-face-background 'company-tooltip-selection "#aaa")
-     (set-face-foreground 'company-tooltip-common "#9a0000")
-     (set-face-foreground 'company-tooltip-common-selection "#9a0000")
-     (set-face-foreground 'company-tooltip-annotation "#00008e")))
   ;; Use C-\ to activate the Company autocompleter.
   ;; We invoke company-try-hard to gather completion candidates from multiple
   ;; sources if the active source isn't being very forthcoming.
