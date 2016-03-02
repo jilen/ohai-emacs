@@ -33,7 +33,7 @@
 ;; Configure the light colour scheme.
 (defun ohai-appearance/light ()
   (interactive)
-  (load-theme 'leuven)
+  (load-theme 'leuven t)
 
   (set-face-attribute 'mode-line nil
                       :foreground "#cccccc"
@@ -62,29 +62,15 @@
 ;; Configure the dark colour scheme.
 (defun ohai-appearance/dark ()
   (interactive)
-  (use-package material-theme)
-  (load-theme 'material t)
+  (use-package dracula-theme)
+  (load-theme 'dracula t)
 
-  (set-face-background 'default "#000")
-
-  (set-face-background 'region "#223355")
-  (set-face-background 'fringe "#000")
-  (set-face-attribute
-   'linum nil
-   :foreground "#678" :background "#000" :height 0.9)
-  (set-face-attribute
-   'linum-highlight-face nil
-   :foreground "#96989c" :background "#263238" :height 0.9)
+  (set-face-attribute 'linum nil :height 0.8)
+  (set-face-attribute 'linum-highlight-face nil
+   :foreground "#96989c"
+   :background "#263238"
+   :height 0.8)
   (set-face-foreground 'which-func "#7f9f7f")
-
-  (set-face-foreground 'term-color-black "#3f3f3f")
-  (set-face-foreground 'term-color-red "#cc9393")
-  (set-face-foreground 'term-color-green "#7f9f7f")
-  (set-face-foreground 'term-color-yellow "#f0dfaf")
-  (set-face-foreground 'term-color-blue "#8cd0d3")
-  (set-face-foreground 'term-color-magenta "#dc8cc3")
-  (set-face-foreground 'term-color-cyan "#93e0e3")
-  (set-face-foreground 'term-color-white "#dcdccc")
 
   (run-hooks 'ohai-appearance/hook)
   (run-hooks 'ohai-appearance/dark-hook))
