@@ -62,6 +62,8 @@
 (setq-default py-indent-offset 2)
 ;; XML
 (setq-default nxml-child-indent 2)
+;; CSS
+(setq-default css-indent-offset 2)
 ;; C
 (setq-default c-basic-offset 2)
 ;; HTML etc with web-mode
