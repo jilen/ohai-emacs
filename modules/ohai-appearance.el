@@ -30,23 +30,14 @@
   (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
     (when (fboundp mode) (funcall mode -1))))
 
+
 ;; Configure the light colour scheme.
 (defun ohai-appearance/light ()
   (interactive)
   (load-theme 'leuven t)
-
-  (set-face-attribute 'mode-line nil
-                      :foreground "#cccccc"
-                      :background "#000000"
-                      :box nil
-                      :weight 'bold)
-  (set-face-attribute 'mode-line-buffer-id nil
-                      :foreground "white"
-                      :weight 'bold)
-  (set-face-foreground 'which-func "#3cb64a")
   (set-face-attribute 'linum nil :height 0.7)
-  (set-face-attribute 'linum-highlight-face nil :foreground nil :background "#ddd" :height 0.7)
-
+  (set-face-attribute 'linum-highlight-face nil :height 0.7)
+  (setq linum-format " %d ")
   (set-face-foreground 'term-color-black "#ffffff")
   (set-face-foreground 'term-color-red "#f5666d")
   (set-face-foreground 'term-color-green "#3cb64a")
