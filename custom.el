@@ -6,12 +6,11 @@
  '(ohai-personal-taste/paredit t)
  '(ohai-personal-taste/run-wizard nil)
  '(ohai-personal-taste/splash nil)
- '(ohai-personal-taste/style (quote dark))
+ '(ohai-personal-taste/style 'light)
  '(ohai-personal-taste/training-wheels nil)
  '(ohai-personal-taste/window-state (quote normal))
  '(ohai/modules
-   (quote
-    (ohai-appearance
+   '(ohai-appearance
      ohai-fonts
      ohai-general
      ohai-splash
@@ -32,5 +31,5 @@
      ohai-scala
      ohai-php
      ohai-help
-     ohai-elisp))))
+     ohai-elisp)))
 (setq-default tramp-ssh-controlmaster-options "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
