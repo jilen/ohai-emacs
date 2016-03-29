@@ -8,14 +8,13 @@
  '(ohai-personal-taste/splash nil)
  '(ohai-personal-taste/style 'light)
  '(ohai-personal-taste/training-wheels nil)
- '(ohai-personal-taste/window-state (quote normal))
+ '(ohai-personal-taste/window-state 'maximised)
  '(ohai/modules
    '(ohai-appearance
      ohai-fonts
      ohai-general
      ohai-splash
      ohai-helm
-     ohai-gtags
      ohai-html
      ohai-navigation
      ohai-editing
