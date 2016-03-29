@@ -29,12 +29,11 @@
 (when (not ohai-personal-taste/training-wheels)
   (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
     (when (fboundp mode) (funcall mode -1))))
-(use-package solarized-theme)
 
 ;; Configure the light colour scheme.
 (defun ohai-appearance/light ()
   (interactive)
-  (load-theme 'solarized-light t)
+  (use-package solarized-theme)
   (set-face-attribute 'linum nil :height 0.7)
   (set-face-attribute 'linum-highlight-face nil :height 0.7)
   (setq linum-format " %d ")
@@ -53,8 +52,8 @@
 ;; Configure the dark colour scheme.
 (defun ohai-appearance/dark ()
   (interactive)
-  (load-theme 'solarized-dark t)
-
+  (use-package dracula-theme)
+  (load-theme 'dracula t)
   (set-face-attribute 'linum nil :height 0.8)
   (set-face-attribute 'linum-highlight-face nil
    :foreground "#96989c"
