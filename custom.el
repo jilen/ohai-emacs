@@ -8,7 +8,7 @@
  '(ohai-personal-taste/splash nil)
  '(ohai-personal-taste/style 'light)
  '(ohai-personal-taste/training-wheels nil)
- '(ohai-personal-taste/window-state 'maximised)
+ '(ohai-personal-taste/window-state 'normal)
  '(ohai/modules
    '(ohai-appearance
      ohai-fonts
@@ -18,7 +18,7 @@
      ohai-html
      ohai-navigation
      ohai-editing
-     ohai-complete
+     ohai-ac
      ohai-javascript
      ohai-snippets
      ohai-codestyle

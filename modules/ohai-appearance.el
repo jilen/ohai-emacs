@@ -34,26 +34,18 @@
 (defun ohai-appearance/light ()
   (interactive)
   (use-package solarized-theme)
+  (load-theme 'solarized-light t)
   (set-face-attribute 'linum nil :height 0.7)
   (set-face-attribute 'linum-highlight-face nil :height 0.7)
   (setq linum-format " %d ")
-  (set-face-foreground 'term-color-black "#ffffff")
-  (set-face-foreground 'term-color-red "#f5666d")
-  (set-face-foreground 'term-color-green "#3cb64a")
-  (set-face-foreground 'term-color-yellow "#ce5c00")
-  (set-face-foreground 'term-color-blue "#00578e")
-  (set-face-foreground 'term-color-magenta "#d020f0")
-  (set-face-foreground 'term-color-cyan "#6799cc")
-  (set-face-foreground 'term-color-white "#000000")
-
   (run-hooks 'ohai-appearance/hook)
   (run-hooks 'ohai-appearance/light-hook))
 
 ;; Configure the dark colour scheme.
 (defun ohai-appearance/dark ()
   (interactive)
-  (use-package dracula-theme)
-  (load-theme 'dracula t)
+  (use-package aurora-theme)
+  (load-theme 'aurora t)
   (set-face-attribute 'linum nil :height 0.8)
   (set-face-attribute 'linum-highlight-face nil
    :foreground "#96989c"

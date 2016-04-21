@@ -27,12 +27,15 @@
   ;; Activate Helm.
   (helm-mode 1)
   (with-eval-after-load "ohai-project"
+    (use-package helm-ag)
     (use-package helm-projectile
+      :config
+      (require 'helm-ag)
       ;; A binding for using Helm to pick files using Projectile,
       ;; and override the normal grep with a Projectile based grep.
       :init (helm-projectile-on)
       :bind (("C-c C-f" . helm-projectile-find-file-dwim)
-             ("C-x C-g" . helm-projectile-grep))))
+             ("C-x C-g" . helm-projectile-ag))))
   ;; Tell Helm to resize the selector as needed.
   (helm-autoresize-mode 1)
   ;; Make Helm look nice.

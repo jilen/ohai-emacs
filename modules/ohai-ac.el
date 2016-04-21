@@ -3,7 +3,8 @@
 ;;; Commentary:
 ;;
 (use-package auto-complete
-  :config (ac-config-default)
+  :init (ac-config-default)
+  :config (setq ac-auto-show-menu t)
   )
 
 (provide 'ohai-ac)
