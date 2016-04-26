@@ -33,13 +33,19 @@
 ;; Configure the light colour scheme.
 (defun ohai-appearance/light ()
   (interactive)
-  (use-package solarized-theme)
-  (load-theme 'solarized-light t)
-  (set-face-attribute 'linum nil :height 0.7)
+  (use-package moe-theme :config (load-theme 'moe-light t))
+  (set-face-attribute 'linum nil :height 0.7
+                      :foreground (face-foreground 'default)
+                      :background (face-background 'default))
   (set-face-attribute 'linum-highlight-face nil :height 0.7)
+  (set-face-attribute 'fringe nil :height 0.5
+                      :foreground (face-foreground 'default)
+                      :background (face-background 'default))
   (setq linum-format " %d ")
+  (setq-default left-margin-width 4 right-margin-width 4)
   (run-hooks 'ohai-appearance/hook)
   (run-hooks 'ohai-appearance/light-hook))
+
 
 ;; Configure the dark colour scheme.
 (defun ohai-appearance/dark ()
@@ -48,9 +54,9 @@
   (load-theme 'aurora t)
   (set-face-attribute 'linum nil :height 0.8)
   (set-face-attribute 'linum-highlight-face nil
-   :foreground "#96989c"
-   :background "#263238"
-   :height 0.8)
+                      :foreground "#96989c"
+                      :background "#263238"
+                      :height 0.8)
   (set-face-foreground 'which-func "#7f9f7f")
   (run-hooks 'ohai-appearance/hook)
   (run-hooks 'ohai-appearance/dark-hook))
@@ -100,8 +106,8 @@
 ;; Ensure linum-mode is disabled in certain major modes.
 (setq linum-disabled-modes
       '(term-mode slime-repl-mode magit-status-mode help-mode nrepl-mode
-        mu4e-main-mode mu4e-headers-mode mu4e-view-mode
-        mu4e-compose-mode))
+                  mu4e-main-mode mu4e-headers-mode mu4e-view-mode
+                  mu4e-compose-mode))
 (defun linum-on ()
   (unless (or (minibufferp) (member major-mode linum-disabled-modes))
     (linum-mode 1)))
