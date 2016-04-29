@@ -33,7 +33,7 @@
 ;; Configure the light colour scheme.
 (defun ohai-appearance/light ()
   (interactive)
-  (use-package moe-theme :config (load-theme 'moe-light t))
+  (use-package color-theme-sanityinc-solarized :config (load-theme 'sanityinc-solarized-light t))
   (set-face-attribute 'linum nil :height 0.7
                       :foreground (face-foreground 'default)
                       :background (face-background 'default))
@@ -50,8 +50,7 @@
 ;; Configure the dark colour scheme.
 (defun ohai-appearance/dark ()
   (interactive)
-  (use-package aurora-theme)
-  (load-theme 'aurora t)
+  (use-package dracula-theme :config (load-theme 'dracula t))
   (set-face-attribute 'linum nil :height 0.8)
   (set-face-attribute 'linum-highlight-face nil
                       :foreground "#96989c"
