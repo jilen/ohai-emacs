@@ -28,8 +28,6 @@
   (helm-mode 1)
   (with-eval-after-load "ohai-project"
     (use-package helm-projectile
-      :config
-
       ;; A binding for using Helm to pick files using Projectile,
       ;; and override the normal grep with a Projectile based grep.
       :bind (("C-c C-f" . helm-projectile-find-file-dwim)
@@ -51,16 +49,11 @@
   ;; Replace common selectors with Helm versions.
   :bind (("M-x" . helm-M-x)
          ("C-x C-f" . helm-find-files)
-         ("C-x C-g" . helm-do-ag)
+         ("C-x C-g" . helm-do-grep)
          ("C-x b" . helm-buffers-list)
          ("C-x c g" . helm-google-suggest)
          ("C-t" . helm-imenu)
          ("M-y" . helm-show-kill-ring)))
-
-(with-eval-after-load 'helm-projectile
-  (use-package helm-ag :config (require 'helm-ag))
-  )
-
 
 ;; Enrich isearch with Helm using the `C-S-s' binding.
 ;; swiper-helm behaves subtly different from isearch, so let's not
@@ -119,8 +112,7 @@
 
 (global-set-key (kbd "C-c C-e") 'ohai-helm/find-files-in-emacs-d)
 
-(require 'helm-projectile)
-(helm-projectile-on)
+
 
 (provide 'ohai-helm)
 ;;; ohai-helm.el ends here
