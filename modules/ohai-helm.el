@@ -31,8 +31,7 @@
       ;; A binding for using Helm to pick files using Projectile,
       ;; and override the normal grep with a Projectile based grep.
       :bind (("C-c C-f" . helm-projectile-find-file-dwim)
-             ("C-x C-g" . helm-projectile-grep))
-      :config (helm-projectile-on)))
+             ("C-x C-g" . helm-projectile-ag))))
   ;; Tell Helm to resize the selector as needed.
   (helm-autoresize-mode 1)
   ;; Make Helm look nice.
@@ -112,7 +111,8 @@
 
 (global-set-key (kbd "C-c C-e") 'ohai-helm/find-files-in-emacs-d)
 
-
+(require 'helm-projectile)
+(helm-projectile-on)
 
 (provide 'ohai-helm)
 ;;; ohai-helm.el ends here

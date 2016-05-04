@@ -33,7 +33,7 @@
 ;; Configure the light colour scheme.
 (defun ohai-appearance/light ()
   (interactive)
-  (use-package color-theme-sanityinc-solarized :config (load-theme 'sanityinc-solarized-light t))
+  (use-package leuven-theme :config (load-theme 'leuven t))
   (set-face-attribute 'linum nil :height 0.7
                       :foreground (face-foreground 'default)
                       :background (face-background 'default))
