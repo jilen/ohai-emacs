@@ -50,7 +50,7 @@
 ;; Configure the dark colour scheme.
 (defun ohai-appearance/dark ()
   (interactive)
-  (use-package color-theme-sanityinc-solarized :config (load-theme 'sanityinc-solarized-dark t))
+  (use-package dracula-theme :config (load-theme 'dracula t))
     (set-face-attribute 'linum nil :height 0.7
                       :foreground (face-foreground 'default)
                       :background (face-background 'default))

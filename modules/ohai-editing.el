@@ -37,10 +37,10 @@
   (bind-keys :map mc/keymap
              ("C-'" . nil))
   :bind (("<insert>" . mc/mark-next-like-this)
-	 ("S-<insert>" . mc/mark-previous-like-this)
-	 ("C-'" . mc/mark-more-like-this-extended)
-	 ("C-\"" . mc/mark-all-like-this-dwim)
-	 ("C-M-'" . mc/edit-lines)))
+         ("S-<insert>" . mc/mark-previous-like-this)
+         ("C-'" . mc/mark-more-like-this-extended)
+         ("C-\"" . mc/mark-all-like-this-dwim)
+         ("C-M-'" . mc/edit-lines)))
 
 ;; Use C-= to select the innermost logical unit your cursor is on.
 ;; Keep hitting C-= to expand it to the next logical unit.
@@ -147,5 +147,9 @@
   :config
   (volatile-highlights-mode t)
   :diminish volatile-highlights-mode)
-
+;; store all backup and autosave files in the tmp dir
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
 (provide 'ohai-editing)
