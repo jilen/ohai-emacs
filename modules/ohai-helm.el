@@ -111,8 +111,8 @@
 
 (global-set-key (kbd "C-c C-e") 'ohai-helm/find-files-in-emacs-d)
 
-(require 'helm-projectile)
-(helm-projectile-on)
+(use-package helm-projectile :init
+  (helm-projectile-on))
 
 (provide 'ohai-helm)
 ;;; ohai-helm.el ends here

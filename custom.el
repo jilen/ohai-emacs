@@ -14,7 +14,6 @@
      ohai-fonts
      ohai-general
      ohai-splash
-     ohai-helm
      ohai-html
      ohai-navigation
      ohai-editing
@@ -24,6 +23,7 @@
      ohai-codestyle
      ohai-dired
      ohai-project
+     ohai-helm
      ohai-flycheck
      ohai-git
      ohai-orgmode

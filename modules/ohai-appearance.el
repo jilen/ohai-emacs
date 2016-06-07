@@ -33,7 +33,7 @@
 ;; Configure the light colour scheme.
 (defun ohai-appearance/light ()
   (interactive)
-  (use-package leuven-theme :config (load-theme 'leuven t))
+  (use-package material-theme :config (load-theme 'material-light t))
   (set-face-attribute 'linum nil :height 0.7
                       :foreground (face-foreground 'default)
                       :background (face-background 'default))
@@ -50,13 +50,15 @@
 ;; Configure the dark colour scheme.
 (defun ohai-appearance/dark ()
   (interactive)
-  (use-package dracula-theme :config (load-theme 'dracula t))
-  (set-face-attribute 'linum nil :height 0.8)
-  (set-face-attribute 'linum-highlight-face nil
-                      :foreground "#96989c"
-                      :background "#263238"
-                      :height 0.8)
-  (set-face-foreground 'which-func "#7f9f7f")
+  (use-package color-theme-sanityinc-solarized :config (load-theme 'sanityinc-solarized-dark t))
+    (set-face-attribute 'linum nil :height 0.7
+                      :foreground (face-foreground 'default)
+                      :background (face-background 'default))
+  (set-face-attribute 'linum-highlight-face nil :height 0.7)
+  (set-face-attribute 'fringe nil :height 0.5
+                      :foreground (face-foreground 'default)
+                      :background (face-background 'default))
+  (setq linum-format " %d ")
   (run-hooks 'ohai-appearance/hook)
   (run-hooks 'ohai-appearance/dark-hook))
 
@@ -99,6 +101,7 @@
 ;; Show column numbers in modeline.
 (setq column-number-mode t)
 
+;;
 ;; Show current function in modeline.
 (which-function-mode)
 
