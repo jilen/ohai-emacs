@@ -29,9 +29,6 @@
   :commands projectile-global-mode
   :config
   (setq projectile-use-git-grep t)
-  (projectile-global-mode)
-  ;; Use C-c C-f to find a file anywhere in the current project.
-  :bind ("C-c C-f" . projectile-find-file)
-  :diminish projectile-mode)
+  (projectile-global-mode))
 
 (provide 'ohai-project)
