@@ -28,15 +28,10 @@
 (require 'helm-projectile)
 (require 'helm-eshell)
 
-(setq
-      helm-buffers-fuzzy-matching           t
-
-
-      )
-
 (helm-autoresize-mode 1)
 ;; Make Helm look nice.
 (setq-default helm-split-window-in-side-p  t
+              helm-buffers-fuzzy-matching           t
               helm-display-header-line     nil
               helm-autoresize-min-height   10
               helm-autoresize-max-height 35
@@ -88,6 +83,7 @@
 
 ;; enable Helm version of Projectile with replacment commands
 (helm-projectile-on)
+(global-set-key (kbd "C-x C-g") 'helm-projectile-ag)
 
 (provide 'ohai-helm)
 ;;; ohai-helm.el ends here
