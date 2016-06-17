@@ -5,10 +5,9 @@
  ;; If there is more than one, they won't work right.
  '(ohai-personal-taste/paredit t)
  '(ohai-personal-taste/run-wizard nil)
- '(ohai-personal-taste/splash nil)
- '(ohai-personal-taste/style 'light)
+ '(ohai-personal-taste/style (quote light))
  '(ohai-personal-taste/training-wheels nil)
- '(ohai-personal-taste/window-state 'normal)
+ '(ohai-personal-taste/window-state (quote normal))
  '(ohai/modules
    '(ohai-appearance
      ohai-fonts
@@ -18,6 +17,8 @@
      ohai-navigation
      ohai-editing
      ohai-ac
+     ohai-vue
+     ohai-markdown
      ohai-javascript
      ohai-snippets
      ohai-codestyle

@@ -21,8 +21,6 @@
 ;;; Code:
 ;; Do an Emacs version check before going any further.
 
-(set-frame-font "monospace:weight=Book")
-
 (when (or (< emacs-major-version 24)
           (and (= emacs-major-version 24) (< emacs-minor-version 4)))
   (x-popup-dialog

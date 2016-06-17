@@ -5,10 +5,12 @@
 
 ;;; Code:
 (require 'ohai-lib)
-(define-derived-mode sbt-build-mode scala-mode ".sbt build file major mode")
-(add-to-list 'auto-mode-alist '("\\.sbt\\'" . sbt-build-mode))
+
 
 (use-package scala-mode
+  :init
+  (define-derived-mode sbt-build-mode scala-mode ".sbt build file major mode")
+  (add-to-list 'auto-mode-alist '("\\.sbt\\'" . sbt-build-mode))
   :config
   (when (ohai/resolve-exec "drip") (setenv "JAVACMD" "drip"))
   (setq scala-indent:use-javadoc-style t)
