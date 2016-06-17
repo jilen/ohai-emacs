@@ -4,10 +4,13 @@
 ;; Bring scala development related modes
 
 ;;; Code:
-
+(require 'ohai-lib)
+(define-derived-mode sbt-build-mode scala-mode ".sbt build file major mode")
+(add-to-list 'auto-mode-alist '("\\.sbt\\'" . sbt-build-mode))
 
 (use-package scala-mode
   :config
+  (when (ohai/resolve-exec "drip") (setenv "JAVACMD" "drip"))
   (setq scala-indent:use-javadoc-style t)
   (use-package sbt-mode
     :config
@@ -16,21 +19,10 @@
       "Compile the sbt project."
       (when
           (comint-check-proc (sbt:buffer-name))
-        (sbt-command "test:compile")))
+        (sbt-command "test:compile")))))
 
 
-;;; Sbt settings
-    (add-hook 'sbt-mode-hook
-              '(lambda ()
-                 (setq compilation-skip-threshold 1)
-                 (local-set-key (kbd "C-a") 'comint-bol)
-                 (local-set-key (kbd "M-RET") 'comint-accumulate)))
-
-    (add-hook 'scala-mode-hook
-              '(lambda() (local-set-key (kbd "C-c b") 'compile-sbt-project)))
-    )
-  )
-
+(global-set-key (kbd "C-c b") 'compile-sbt-project)
 (provide 'ohai-scala)
 ;;; Enable compile on save
 

@@ -33,7 +33,8 @@
   :commands sml/setup
   :demand t
   :init
-  (setq sml/theme 'respectful
+  (setq sml/no-confirm-load-theme t
+        sml/theme 'light-powerline
         sml/shorten-directory t
         sml/shorten-modes t
         sml/name-width 40

@@ -4,8 +4,9 @@
 ;;
 (use-package auto-complete
   :init (ac-config-default)
-  :config (setq ac-auto-show-menu t)
-  )
+  :config
+  (global-auto-complete-mode t)
+  (setq ac-auto-show-menu t))
 
 (provide 'ohai-ac)
 

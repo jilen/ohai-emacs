@@ -48,6 +48,7 @@
   ;; Configure js2-mode good.
   (setq-default
    js2-mode-indent-ignore-first-tab t
+   js2-mode-show-strict-warnings nil
    js2-strict-inconsistent-return-warning nil
    js2-global-externs
    '("module" "require" "__dirname" "process" "console" "JSON" "$" "_"))
@@ -66,7 +67,7 @@
   (add-hook 'js2-mode-hook (lambda () (tern-mode t)))
   ;; Locate the Tern binary by querying the system search path, which
   ;; should now include the local npm prefix.
-  (setq tern-command (list (or (ohai/resolve-exec "tern") "tern")))
+  (setq tern-command (list (or (ohai/resolve-exec "tern") "tern") "--no-port-file"))
   ;; Setup Tern as an autocomplete source.
   (with-eval-after-load "company"
     (use-package company-tern
