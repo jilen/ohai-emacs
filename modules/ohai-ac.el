@@ -3,8 +3,8 @@
 ;;; Commentary:
 ;;
 (use-package auto-complete
-  :init (ac-config-default)
   :config
+  (ac-config-default)
   (global-auto-complete-mode t)
   (setq ac-auto-show-menu t))
 

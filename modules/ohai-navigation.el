@@ -52,6 +52,7 @@
   :bind (("C-x o" . ace-window)
          ("C-x C-o" . ace-swap-window))
   :config
+  (set-face-attribute 'aw-leading-char-face nil :foreground "red")
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
 ;; Use C-x M-p to kill the buffer in the other window, revealing

@@ -42,7 +42,10 @@
   (setq-default web-mode-enable-current-element-highlight t)
   ;; Key for renaming tags
   (bind-keys :map web-mode-map
-             ("C-c C-r" . 'mc/mark-sgml-tag-pair)))
+             ("C-c C-r" . 'mc/mark-sgml-tag-pair))
+  (setq web-mode-ac-sources-alist
+        '(("html" . (ac-source-yasnippet ac-source-imenu ac-source-abbrev))
+          ("css" . (ac-source-css-property )))))
 
 ;; Colourise colour names in certain modes.
 (use-package rainbow-mode
