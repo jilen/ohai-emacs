@@ -47,8 +47,7 @@
   (set-face-attribute 'fringe nil :height 0.5
                       :foreground (face-foreground 'default)
                       :background (face-background 'default))
-  (setq linum-format " %d ")
-  (setq-default left-margin-width 4 right-margin-width 4)
+  (setq linum-format " %2d ")
   (run-hooks 'ohai-appearance/hook)
   (run-hooks 'ohai-appearance/light-hook))
 
