@@ -47,9 +47,15 @@
   (set-face-attribute 'fringe nil :height 0.5
                       :foreground (face-foreground 'default)
                       :background (face-background 'default))
-  (setq linum-format " %2d ")
+  (setq linum-format " %02d ")
   (run-hooks 'ohai-appearance/hook)
   (run-hooks 'ohai-appearance/light-hook))
+
+(with-eval-after-load "web-mode"
+  (set-face-attribute 'web-mode-current-element-highlight-face nil
+		      :background (face-background 'highlight))
+  )
+
 
 
 ;; Configure the dark colour scheme.

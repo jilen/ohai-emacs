@@ -12,7 +12,6 @@
   (define-derived-mode sbt-build-mode scala-mode ".sbt build file major mode")
   (add-to-list 'auto-mode-alist '("\\.sbt\\'" . sbt-build-mode))
   :config
-  (when (ohai/resolve-exec "drip") (setenv "JAVACMD" "drip"))
   (use-package sbt-mode
     :config
     (defun compile-sbt-project ()
