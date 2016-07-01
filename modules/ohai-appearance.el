@@ -32,7 +32,7 @@
 (use-package rainbow-delimiters
   :config (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
-;(set-face-attribute 'default nil :weight 'Book :height 105)
+(set-face-attribute 'default nil :weight 'Book)
 
 ;; Configure the light colour scheme.
 (defun ohai-appearance/light ()
