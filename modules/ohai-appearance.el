@@ -22,7 +22,6 @@
 
 (require 'ohai-package)
 (require 'ohai-personal-taste)
-
 (require 'term)
 
 ;; Get rid of the training wheels, if you're ready for it.
@@ -30,10 +29,17 @@
   (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
     (when (fboundp mode) (funcall mode -1))))
 
+(use-package rainbow-delimiters
+  :config (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+
+;(set-face-attribute 'default nil :weight 'Book :height 105)
+
 ;; Configure the light colour scheme.
 (defun ohai-appearance/light ()
   (interactive)
-  (use-package material-theme :config (load-theme 'material-light t))
+  (use-package spacemacs-theme)
+  (load-theme 'spacemacs-light t)
+  (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
   (set-face-attribute 'linum nil :height 0.7
                       :foreground (face-foreground 'default)
                       :background (face-background 'default))
@@ -50,8 +56,9 @@
 ;; Configure the dark colour scheme.
 (defun ohai-appearance/dark ()
   (interactive)
-  (use-package dracula-theme :config (load-theme 'dracula t))
-    (set-face-attribute 'linum nil :height 0.7
+  (use-package spacemacs-theme)
+  (load-theme 'spacemacs-dark t)
+  (set-face-attribute 'linum nil :height 0.7
                       :foreground (face-foreground 'default)
                       :background (face-background 'default))
   (set-face-attribute 'linum-highlight-face nil :height 0.7)
@@ -61,6 +68,8 @@
   (setq linum-format " %d ")
   (run-hooks 'ohai-appearance/hook)
   (run-hooks 'ohai-appearance/dark-hook))
+
+
 
 ;; Setup hooks to re-run after all modules have loaded, allowing
 ;; other modules to tweak the theme without having to wait
@@ -98,13 +107,6 @@
   :config
   (hlinum-activate))
 
-;; Show column numbers in modeline.
-(setq column-number-mode t)
-
-;;
-;; Show current function in modeline.
-(which-function-mode)
-
 ;; Ensure linum-mode is disabled in certain major modes.
 (setq linum-disabled-modes
       '(term-mode slime-repl-mode magit-status-mode help-mode nrepl-mode
@@ -117,14 +119,19 @@
 ;; Highlight matching braces.
 (show-paren-mode 1)
 
-;; Engage Nyan Cat!
-(use-package nyan-mode
-  :config
-  (nyan-mode 1)
-  (setq nyan-bar-length 16
-        nyan-wavy-trail t))
 
-;; Unclutter the modeline
+(use-package window-numbering :config
+  (defun window-numbering-install-mode-line (&optional position)
+    "Do nothing.")
+  (window-numbering-mode 1))
+
+(use-package spaceline :config
+  (setq-default powerline-default-separator 'wave)
+  (setq-default spaceline-window-numbers-unicode t)
+  (require 'spaceline-config)
+  (spaceline-helm-mode 1)
+  (spaceline-emacs-theme))
+
 (use-package diminish)
 
 
@@ -176,8 +183,6 @@
     (ohai-appearance/light))))
 
 (ohai-appearance/apply-style)
-
-
 
 (provide 'ohai-appearance)
 ;;; ohai-appearance.el ends here

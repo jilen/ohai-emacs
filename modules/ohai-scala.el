@@ -13,7 +13,6 @@
   (add-to-list 'auto-mode-alist '("\\.sbt\\'" . sbt-build-mode))
   :config
   (when (ohai/resolve-exec "drip") (setenv "JAVACMD" "drip"))
-  (setq scala-indent:use-javadoc-style t)
   (use-package sbt-mode
     :config
     (defun compile-sbt-project ()
@@ -22,7 +21,6 @@
       (when
           (comint-check-proc (sbt:buffer-name))
         (sbt-command "test:compile")))))
-
 
 (global-set-key (kbd "C-c b") 'compile-sbt-project)
 (provide 'ohai-scala)
