@@ -147,9 +147,4 @@
   :config
   (volatile-highlights-mode t)
   :diminish volatile-highlights-mode)
-;; store all backup and autosave files in the tmp dir
-(setq backup-directory-alist
-      `((".*" . ,temporary-file-directory)))
-(setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
 (provide 'ohai-editing)
