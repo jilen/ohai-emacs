@@ -14,6 +14,7 @@
   :config
   (use-package sbt-mode
     :config
+    (setq-default scala-indent:use-javadoc-style t)
     (defun compile-sbt-project ()
       (interactive)
       "Compile the sbt project."
