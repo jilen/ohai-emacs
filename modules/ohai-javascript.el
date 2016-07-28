@@ -47,6 +47,7 @@
     (js2r-add-keybindings-with-prefix "C-c C-m"))
   ;; Configure js2-mode good.
   (setq-default
+   js2-indent-switch-body t
    js2-mode-indent-ignore-first-tab t
    js2-mode-show-strict-warnings nil
    js2-strict-inconsistent-return-warning nil

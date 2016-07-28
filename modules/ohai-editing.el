@@ -60,6 +60,9 @@
   (indent-region (point-min) (point-max)))
 (global-set-key (kbd "C-c <tab>") 'indent-buffer)
 
+;; Auto revert buffer
+(global-auto-revert-mode t)
+
 ;; Automatically insert matching braces and do other clever
 ;; things pertaining to braces and such.
 (electric-pair-mode 1)
