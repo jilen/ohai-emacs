@@ -53,7 +53,7 @@
 
 (with-eval-after-load "web-mode"
   (set-face-attribute 'web-mode-current-element-highlight-face nil
-		      :background (face-background 'highlight))
+                      :background (face-background 'highlight))
   )
 
 
