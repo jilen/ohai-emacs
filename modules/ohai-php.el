@@ -7,9 +7,7 @@
 (defvar php-electric-pairs '((?\{ . ?\})) "Electric pairs for php-mode.")
 
 (defun ohai-php-mode-init ()
-  (setq c-basic-offset 2)
-  (setq-local electric-pair-pairs (append electric-pair-pairs php-electric-pairs))
-  (setq-local electric-pair-text-pairs electric-pair-pairs))
+  (setq c-basic-offset 2))
 
 (use-package php-mode
   :config

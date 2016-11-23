@@ -34,6 +34,7 @@
 (use-package web-mode
   :mode (("\\.jsx?$" . web-mode)
          ("\\.es6\\'" . web-mode)
+         ("\\.tag\\'" . web-mode)
          ("\\.ejs\\'" . web-mode))
   :config
   (setq web-mode-content-types-alist

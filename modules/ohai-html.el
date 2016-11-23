@@ -31,6 +31,7 @@
          ("\\.html?\\'" . web-mode)
          ;; Let's add some extensions from the web-mode docs too.
          ("\\.phtml\\'" . web-mode)
+         ("\\.tag\\'" . web-mode)
          ("\\.tpl\\.php\\'" . web-mode)
          ("\\.[agj]sp\\'" . web-mode)
          ("\\.as[cp]x\\'" . web-mode)
