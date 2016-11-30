@@ -4,12 +4,12 @@
 ;; Dashboard setup
 
 ;;; Code
-(add-to-list 'load-path (concat user-emacs-directory "dashboard/"))
 
-(use-package page-break-lines)
-(use-package projectile)
-(require 'dashboard)
-(dashboard-setup-startup-hook)
+(use-package dashboard :config
+  (setq dashboard-items '((recents  . 5)
+                          (projects . 5)))
+  (dashboard-setup-startup-hook))
+
 (provide 'ohai-dashboard)
 
 ;;; ohai-dashboard.el ends here

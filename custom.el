@@ -12,7 +12,7 @@
    '(ohai-appearance
      ohai-fonts
      ohai-general
-     ohai-splash
+     ohai-dashboard
      ohai-html
      ohai-navigation
      ohai-editing
