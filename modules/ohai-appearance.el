@@ -60,8 +60,7 @@
 ;; Configure the dark colour scheme.
 (defun ohai-appearance/dark ()
   (interactive)
-  (use-package spacemacs-theme)
-  (load-theme 'spacemacs-dark t)
+  (use-package gruvbox-theme :config (load-theme 'gruvbox t))
   (set-face-attribute 'linum nil :height 0.7
                       :foreground (face-foreground 'default)
                       :background (face-background 'default))
