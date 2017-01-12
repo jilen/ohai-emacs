@@ -6,7 +6,7 @@ But now there is Ohai Emacs! Simply install Ohai Emacs as your emacs.d, and you 
 
 There is even a configuration [[https://i.chzbgr.com/maxW500/8443050752/h55957A15/][wizard]]!
 
-[[./.scrot.png]]
+[[./scrot.png]]
 
 ** Installation
 
