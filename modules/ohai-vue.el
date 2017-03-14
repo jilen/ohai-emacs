@@ -3,26 +3,34 @@
 ;;; Commentary:
 ;;
 
-(use-package web-mode
-  :init
-  (define-derived-mode vue-mode web-mode "vue mode simply alias web-mode")
-  (add-to-list 'auto-mode-alist '("\\.vue\\'" . vue-mode))
+(use-package web-mode)
+(use-package add-node-modules-path)
+
+
+(define-derived-mode vue-mode web-mode "Vue"
   (setq web-mode-script-padding 0)
-  (setq web-mode-style-padding 0)
-  :config
-  ;;; auto-complete-setup
-  (with-eval-after-load "flycheck"
-    (flycheck-add-mode 'javascript-eslint 'vue-mode)
-    (setq flycheck-javascript-eslint-executable (or (ohai/resolve-exec "eslint") "eslint")))
+  (setq web-mode-style-padding 0))
 
-  (with-eval-after-load "auto-complete"
-    (use-package ac-html
-      :config
-      (setq web-mode-ac-sources-alist
-            '(("html" . ())
-              ("css" . (ac-source-css-property ac-source-words-in-buffer)))))
+(defun setup-ac ()
+  (setq web-mode-ac-sources-alist
+  '(("css" . (ac-source-css-property))
+    ("html" . (ac-source-words-in-buffer ac-source-abbrev))))
+   (auto-complete-mode 1)
+  )
 
-    (add-to-list 'ac-modes 'vue-mode)))
+
+
+(add-to-list 'auto-mode-alist '("\\.vue\\'" . vue-mode))
+
+(add-hook 'vue-mode-hook #'add-node-modules-path)
+(add-hook 'vue-mode-hook #'setup-ac)
+
+;; Flycheck settings
+(with-eval-after-load "flycheck"
+  (flycheck-add-mode 'javascript-eslint 'vue-mode))
+
+;; Company setting
+
 
 (provide 'ohai-vue)
 
