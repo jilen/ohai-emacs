@@ -6,7 +6,6 @@
 ;;; Code:
 (require 'ohai-lib)
 
-
 (use-package scala-mode
   :init
   :config
@@ -20,11 +19,16 @@
           (comint-check-proc (sbt:buffer-name))
         (sbt-command "test:compile")))))
 
-(define-derived-mode sbt-build-mode scala-mode ".sbt build file major mode")
+(defun setup-scala ()
+    (setq case-fold-search nil))
+
+(add-hook 'scala-mode-hook 'setup-scala)
+
+
+(define-derived-mode sbt-build-mode scala-mode ".sbt")
 (add-to-list 'auto-mode-alist '("\\.sbt\\'" . sbt-build-mode))
 
 (global-set-key (kbd "C-c b") 'compile-sbt-project)
 (provide 'ohai-scala)
-;;; Enable compile on save
 
 ;;; ohai-scala.el ends here
