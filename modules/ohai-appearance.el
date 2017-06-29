@@ -29,15 +29,13 @@
   (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
     (when (fboundp mode) (funcall mode -1))))
 
-(set-face-attribute 'default nil :weight 'Book)
 
 (use-package rainbow-delimiters
   :config (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 ;; Configure the light colour scheme.
 (defun ohai-appearance/light ()
   (interactive)
-  (use-package spacemacs-theme)
-  (load-theme 'spacemacs-light t)
+  (use-package gruvbox-theme :config (load-theme 'gruvbox-light-medium t))
   (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
   (set-face-attribute 'linum nil :height 0.7
                       :foreground (face-foreground 'default)
@@ -60,7 +58,7 @@
 ;; Configure the dark colour scheme.
 (defun ohai-appearance/dark ()
   (interactive)
-  (use-package gruvbox-theme :config (load-theme 'gruvbox t))
+  (use-package gruvbox-theme :init (load-theme 'gruvbox t))
   (set-face-attribute 'linum nil :height 0.7
                       :foreground (face-foreground 'default)
                       :background (face-background 'default))
@@ -128,14 +126,17 @@
     "Do nothing.")
   (window-numbering-mode 1))
 
-(use-package spaceline :config
-  (setq-default powerline-default-separator 'wave)
-  (setq-default spaceline-window-numbers-unicode t)
-  (require 'spaceline-config)
-  (spaceline-helm-mode 1)
-  (spaceline-emacs-theme))
-
 (use-package diminish)
+
+(use-package all-the-icons)
+(use-package spaceline)
+(use-package all-the-icons-dired :config (add-hook 'dired-mode-hook (lambda() (all-the-icons-dired-mode))))
+(use-package spaceline-all-the-icons
+  :after spaceline
+  :config
+  (setq spaceline-all-the-icons-separator-type 'wave)
+  (spaceline-all-the-icons-theme))
+
 
 
 (eval-after-load "eldoc" '(diminish 'eldoc-mode))

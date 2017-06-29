@@ -28,6 +28,7 @@
   :demand t
   :commands projectile-global-mode
   :config
+  (setq projectile-mode-line "Projectile")
   (setq projectile-use-git-grep t)
   (projectile-global-mode))
 

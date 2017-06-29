@@ -26,6 +26,10 @@
   :init
   (setq diredp-hide-details-initially-flag nil)
   :config
+  (require 'dired-x)
+  (add-hook 'dired-mode-hook 'dired-hide-details-mode)
+  (setq-default dired-omit-files-p t) ; Buffer-local variable
+  (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
   (set-face-foreground 'diredp-file-name nil))
 
 ;; Keep dired buffers updated when the file system changes.

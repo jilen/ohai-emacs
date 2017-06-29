@@ -44,37 +44,6 @@
     (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode)))
 
 ;; Configure the theme.
-(add-hook
- 'ohai-appearance/dark-hook
- (lambda ()
-   (with-eval-after-load "flycheck"
-     (set-face-background 'flycheck-error "#660000")
-     (set-face-foreground 'flycheck-error nil)
-     (set-face-background 'flycheck-warning "#331800")
-     (set-face-foreground 'flycheck-warning nil)
-     (require 'flycheck-color-mode-line)
-     (set-face-background 'flycheck-color-mode-line-error-face "#440000")
-     (set-face-background 'flycheck-color-mode-line-warning-face "#553300")
-     (set-face-background 'flycheck-color-mode-line-info-face nil)
-     (set-face-foreground 'flycheck-color-mode-line-error-face "#ffffff")
-     (set-face-foreground 'flycheck-color-mode-line-warning-face "#ffffff")
-     (set-face-foreground 'flycheck-color-mode-line-info-face nil))))
-
-(add-hook
- 'ohai-appearance/light-hook
- (lambda ()
-   (with-eval-after-load "flycheck"
-     (set-face-background 'flycheck-error "#ff8888")
-     (set-face-foreground 'flycheck-error nil)
-     (set-face-background 'flycheck-warning "#ffcc88")
-     (set-face-foreground 'flycheck-warning nil)
-     (require 'flycheck-color-mode-line)
-     (set-face-background 'flycheck-color-mode-line-error-face "#ff0000")
-     (set-face-foreground 'flycheck-color-mode-line-error-face "#ffffff")
-     (set-face-background 'flycheck-color-mode-line-warning-face "#886600")
-     (set-face-foreground 'flycheck-color-mode-line-warning-face "#ffffff")
-     (set-face-background 'flycheck-color-mode-line-info-face nil)
-     (set-face-foreground 'flycheck-color-mode-line-info-face nil))))
 
 (with-eval-after-load "helm"
   (use-package helm-flycheck

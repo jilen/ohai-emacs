@@ -6,7 +6,7 @@
 ;; Author: Bodil Stokke <bodil@bodil.org>
 
 ;; This program is free software; you can redistribute it and/or modify
-;; it under the terms of the GNU General Public License as published by
+;; it under the terms of the GNU General Public Licepromisednse as published by
 ;; the Free Software Foundation, either version 3 of the License, or
 ;; (at your option) any later version.
 
@@ -28,6 +28,9 @@
 ;; Select a region and C-M-' to place cursors on each line of the selection.
 ;; Bonus: <insert> key no longer activates overwrite mode.
 ;; What is that thing for anyway?
+(use-package origami
+  :config (global-origami-mode 1)
+  :bind(("C-c v". origami-toggle-node)))
 (use-package multiple-cursors
   :commands multiple-cursors-mode
   :config
@@ -128,6 +131,8 @@
         (set-window-margins nil (car current-margins)
                             (- current-available visual-wrap-column))))))
 
+(eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
+
 ;; A function for easily editing a file as root through TRAMP.
 (defun sudo-edit (&optional arg)
   (interactive "p")
@@ -150,4 +155,12 @@
   :config
   (volatile-highlights-mode t)
   :diminish volatile-highlights-mode)
+
+(eval-after-load 'semantic
+    (add-hook 'semantic-mode-hook
+              (lambda ()
+                (dolist (x (default-value 'completion-at-point-functions))
+                  (when (string-prefix-p "semantic-" (symbol-name x))
+                    (remove-hook 'completion-at-point-functions x))))))
+
 (provide 'ohai-editing)

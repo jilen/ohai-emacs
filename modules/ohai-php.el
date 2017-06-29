@@ -11,6 +11,7 @@
 
 (use-package php-mode
   :config
+  (setq flycheck-php-executable "php56")
   (add-hook 'php-mode-hook 'ohai-php-mode-init))
 
 (provide 'ohai-php)

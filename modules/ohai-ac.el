@@ -4,6 +4,7 @@
 ;;
 (use-package auto-complete
   :config
+  (require 'auto-complete)
   (ac-config-default)
   (global-auto-complete-mode t)
   (setq ac-auto-show-menu t))
