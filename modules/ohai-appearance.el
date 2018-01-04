@@ -23,7 +23,6 @@
 (require 'ohai-package)
 (require 'ohai-personal-taste)
 (require 'term)
-
 ;; Get rid of the training wheels, if you're ready for it.
 (when (not ohai-personal-taste/training-wheels)
   (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
@@ -33,9 +32,13 @@
 (use-package rainbow-delimiters
   :config (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 ;; Configure the light colour scheme.
+
+
+
 (defun ohai-appearance/light ()
   (interactive)
-  (use-package gruvbox-theme :config (load-theme 'gruvbox-light-medium t))
+  (use-package solarized-theme :config
+    (load-theme 'solarized-light t))
   (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
   (set-face-attribute 'linum nil :height 0.7
                       :foreground (face-foreground 'default)
@@ -54,11 +57,11 @@
   )
 
 
-
 ;; Configure the dark colour scheme.
 (defun ohai-appearance/dark ()
   (interactive)
-  (use-package gruvbox-theme :init (load-theme 'gruvbox t))
+  (use-package doom-themes :config
+    (load-theme 'doom-one t))
   (set-face-attribute 'linum nil :height 0.7
                       :foreground (face-foreground 'default)
                       :background (face-background 'default))
@@ -70,7 +73,10 @@
   (run-hooks 'ohai-appearance/hook)
   (run-hooks 'ohai-appearance/dark-hook))
 
-
+(use-package spaceline-all-the-icons
+  :config
+  (setq spaceline-all-the-icons-separator-type 'arrow)
+  (spaceline-all-the-icons-theme))
 
 ;; Setup hooks to re-run after all modules have loaded, allowing
 ;; other modules to tweak the theme without having to wait
@@ -110,9 +116,17 @@
 
 ;; Ensure linum-mode is disabled in certain major modes.
 (setq linum-disabled-modes
-      '(term-mode slime-repl-mode magit-status-mode help-mode nrepl-mode
-                  mu4e-main-mode mu4e-headers-mode mu4e-view-mode
-                  mu4e-compose-mode))
+      '(term-mode
+        sbt-mode
+        slime-repl-mode
+        magit-status-mode
+        help-mode
+        nrepl-mode
+        mu4e-main-mode
+        mu4e-headers-mode
+        mu4e-view-mode
+        mu4e-compose-mode))
+
 (defun linum-on ()
   (unless (or (minibufferp) (member major-mode linum-disabled-modes))
     (linum-mode 1)))
@@ -129,15 +143,7 @@
 (use-package diminish)
 
 (use-package all-the-icons)
-(use-package spaceline)
 (use-package all-the-icons-dired :config (add-hook 'dired-mode-hook (lambda() (all-the-icons-dired-mode))))
-(use-package spaceline-all-the-icons
-  :after spaceline
-  :config
-  (setq spaceline-all-the-icons-separator-type 'wave)
-  (spaceline-all-the-icons-theme))
-
-
 
 (eval-after-load "eldoc" '(diminish 'eldoc-mode))
 (eval-after-load "autopair" '(diminish 'autopair-mode))
@@ -187,6 +193,5 @@
     (ohai-appearance/light))))
 
 (ohai-appearance/apply-style)
-
 (provide 'ohai-appearance)
 ;;; ohai-appearance.el ends here

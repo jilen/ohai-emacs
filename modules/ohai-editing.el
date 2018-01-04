@@ -28,6 +28,7 @@
 ;; Select a region and C-M-' to place cursors on each line of the selection.
 ;; Bonus: <insert> key no longer activates overwrite mode.
 ;; What is that thing for anyway?
+(use-package auto-sudoedit)
 (use-package origami
   :config (global-origami-mode 1)
   :bind(("C-c v". origami-toggle-node)))

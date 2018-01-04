@@ -12,12 +12,16 @@
     (if (zerop (call-process "global" nil t nil "-pr"))
         (buffer-substring (point-min) (1- (point-max)))
       nil)))
+
 (defun gtags-update ()
+  (interactive)
   "Make GTAGS incremental update"
   (call-process "global" nil nil nil "-u"))
+
 (defun gtags-update-hook ()
   (when (gtags-root-dir)
     (gtags-update)))
+
 (add-hook 'after-save-hook #'gtags-update-hook)
 
 

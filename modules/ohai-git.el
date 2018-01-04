@@ -32,11 +32,10 @@
 ;; directly from the current buffer or selection.
 (use-package gist)
 
-;; Mark uncommitted changes in the fringe.
-(use-package git-gutter-fringe
+(use-package diff-hl
   :config
-  (global-git-gutter-mode t)
-  :diminish git-gutter-mode)
+  (global-diff-hl-mode)
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
 
 
 

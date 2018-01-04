@@ -7,6 +7,7 @@
   (require 'auto-complete)
   (ac-config-default)
   (global-auto-complete-mode t)
+  (setq ac-sources (append ac-sources '(ac-source-gtags)))
   (setq ac-auto-show-menu t))
 
 (provide 'ohai-ac)
