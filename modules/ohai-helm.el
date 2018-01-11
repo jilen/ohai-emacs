@@ -19,68 +19,112 @@
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ;;; Code:
-(use-package helm)
-(use-package helm-projectile)
-(use-package helm-descbinds)
-(use-package helm-ag)
 
-(require 'helm-config)
-(require 'helm-projectile)
-(require 'helm-eshell)
+(use-package helm
+  :config
+  (require 'helm-config)
+  (require 'helm)
+  ;; Activate Helm.
+  (helm-mode 1)
+  (with-eval-after-load "ohai-project"
+    (use-package helm-projectile
+      ;; A binding for using Helm to pick files using Projectile,
+      ;; and override the normal grep with a Projectile based grep.
+      :bind (("C-c C-f" . helm-projectile-find-file-dwim)
+             ("C-x C-g" . helm-projectile-grep))
+      :config (helm-projectile-on)))
+  ;; Tell Helm to resize the selector as needed.
+  (helm-autoresize-mode 1)
+  ;; Make Helm look nice.
+  (setq-default helm-display-header-line nil
+                helm-autoresize-min-height 10
+                helm-autoresize-max-height 35
+                helm-split-window-in-side-p t
 
-(helm-autoresize-mode 1)
-;; Make Helm look nice.
-(setq-default helm-split-window-in-side-p  t
-              helm-buffers-fuzzy-matching           t
-              helm-display-header-line     nil
-              helm-autoresize-min-height   10
-              helm-autoresize-max-height 35
-              helm-split-window-in-side-p t
-              helm-ff-search-library-in-sexp        t
-              helm-move-to-line-cycle-in-source     t
-              helm-ff-file-name-history-use-recentf t
-              helm-M-x-fuzzy-match t
-              helm-buffers-fuzzy-matching t
-              helm-recentf-fuzzy-match t
-              helm-apropos-fuzzy-match t)
-(set-face-attribute 'helm-source-header nil :height 0.75)
+                helm-M-x-fuzzy-match t
+                helm-buffers-fuzzy-matching t
+                helm-recentf-fuzzy-match t
+                helm-apropos-fuzzy-match t)
+  (set-face-attribute 'helm-source-header nil :height 0.75)
+  ;; Replace common selectors with Helm versions.
+  :bind (("M-x" . helm-M-x)
+         ("C-x C-f" . helm-find-files)
+         ("C-x C-g" . helm-do-grep)
+         ("C-x b" . helm-buffers-list)
+         ("C-x c g" . helm-google-suggest)
+         ("C-t" . helm-imenu)
+         ("M-y" . helm-show-kill-ring)))
 
-;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
-;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
-;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
-(global-set-key (kbd "C-c h") 'helm-command-prefix)
-(global-unset-key (kbd "C-x c"))
+;; Enrich isearch with Helm using the `C-S-s' binding.
+;; swiper-helm behaves subtly different from isearch, so let's not
+;; override the default binding.
+(use-package swiper-helm
+  :bind (("C-S-s" . swiper-helm)))
 
-(define-key helm-command-map (kbd "o")     'helm-occur)
-(define-key helm-command-map (kbd "g")     'helm-do-grep)
-(define-key helm-command-map (kbd "SPC")   'helm-all-mark-rings)
+;; Enable fuzzy matching in Helm navigation.
+(use-package helm-flx
+  :config
+  (with-eval-after-load "helm"
+    (require 'helm-flx)
+    (helm-flx-mode 1)))
 
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "C-x C-m") 'helm-M-x)
-(global-set-key (kbd "M-y") 'helm-show-kill-ring)
-(global-set-key (kbd "C-x b") 'helm-mini)
-(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "C-h f") 'helm-apropos)
-(global-set-key (kbd "C-h r") 'helm-info-emacs)
-(global-set-key (kbd "C-h C-l") 'helm-locate-library)
-(global-set-key (kbd "C-c f") 'helm-recentf)
+;; Set up a couple of tweaks from helm-ext.
+(use-package helm-ext
+  :config
+  (helm-ext-ff-enable-skipping-dots t)
+  (helm-ext-ff-enable-auto-path-expansion t))
 
-(define-key minibuffer-local-map (kbd "C-c C-l") 'helm-minibuffer-history)
-
-;; use helm to list eshell history
+;; Use Helm to complete with multiple matches in eshell.
 (add-hook 'eshell-mode-hook
-          #'(lambda ()
-              (substitute-key-definition 'eshell-list-history 'helm-eshell-history eshell-mode-map)))
+          (lambda ()
+            (define-key eshell-mode-map [remap eshell-pcomplete] 'helm-esh-pcomplete)))
 
-(substitute-key-definition 'find-tag 'helm-etags-select global-map)
-(setq projectile-completion-system 'helm)
-(helm-descbinds-mode)
-(helm-mode 1)
 
-;; enable Helm version of Projectile with replacment commands
-(helm-projectile-on)
-(global-set-key (kbd "C-x C-g") 'helm-projectile-ag)
+
+;; Bind C-c C-e to open a Helm selection of the files in your .emacs.d.
+;; We get the whole list of files and filter it through `git check-ignore'
+;; to get rid of transient files.
+(defun ohai-helm/gitignore (root files success error)
+  (let ((default-directory root))
+    (let ((proc (start-process "gitignore" (generate-new-buffer-name "*gitignore*")
+                               "git" "check-ignore" "--stdin"))
+          (s (lambda (proc event)
+               (if (equal "finished\n" event)
+                   (funcall success
+                            (with-current-buffer (process-buffer proc)
+                              (s-split "\n" (s-trim (buffer-string)))))
+                 (funcall error event))
+               (kill-buffer (process-buffer proc))
+               (delete-process proc))))
+      (set-process-sentinel proc s)
+      (process-send-string proc (concat (s-join "\n" files) "\n"))
+      (process-send-eof proc))))
+
+(defun ohai-helm/files-in-repo (path success error)
+  (let ((files (f-files path nil t)))
+    (ohai-helm/gitignore path files
+                         (lambda (ignored)
+                           (funcall success (-difference files ignored)))
+                         error)))
+
+(defun ohai-helm/find-files-in-emacs-d ()
+  (interactive)
+  (ohai-helm/files-in-repo
+   dotfiles-dir
+   (lambda (files)
+     (let ((relfiles (-filter
+                      (lambda (f) (not (f-descendant-of? f ".git")))
+                      (-map (lambda (f) (f-relative f dotfiles-dir)) files))))
+       (find-file
+        (concat dotfiles-dir
+                (helm :sources (helm-build-sync-source ".emacs.d" :candidates relfiles)
+                      :ff-transformer-show-only-basename helm-ff-transformer-show-only-basename
+                      :buffer "*helm emacs.d*")))))
+   (lambda (err) (warn "ohai-helm/find-files-in-emacs-d: %s" err))))
+
+(global-set-key (kbd "C-c C-e") 'ohai-helm/find-files-in-emacs-d)
+
+
 
 (provide 'ohai-helm)
 ;;; ohai-helm.el ends here

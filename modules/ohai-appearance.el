@@ -37,8 +37,8 @@
 
 (defun ohai-appearance/light ()
   (interactive)
-  (use-package solarized-theme :config
-    (load-theme 'solarized-light t))
+  (use-package doom-themes :config
+    (load-theme 'doom-one-light t))
   (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
   (set-face-attribute 'linum nil :height 0.7
                       :foreground (face-foreground 'default)
