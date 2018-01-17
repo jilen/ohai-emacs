@@ -4,7 +4,7 @@
 ;; Add GNU Global support
 
 ;;; Code:
-(use-package helm-gtags)
+(use-package counsel-gtags)
 
 (defun gtags-root-dir ()
   "Returns GTAGS root directory or nil if doesn't exist."
@@ -13,10 +13,14 @@
         (buffer-substring (point-min) (1- (point-max)))
       nil)))
 
+(defun output-message-sentinel (process msg)
+  (when (memq (process-status process) '(exit signal))
+    (message (concat (process-name process) " - " msg))))
+
 (defun gtags-update ()
   (interactive)
   "Make GTAGS incremental update"
-  (call-process "global" nil nil nil "-u"))
+  (set-process-sentinel (start-process "global" "gtags" "global" "-u") #'output-message-sentinel))
 
 (defun gtags-update-hook ()
   (when (gtags-root-dir)
@@ -24,14 +28,16 @@
 
 (add-hook 'after-save-hook #'gtags-update-hook)
 
+(with-eval-after-load 'counsel-gtags
+  (define-key counsel-gtags-mode-map (kbd "M-.") 'counsel-gtags-dwim)
+  (define-key counsel-gtags-mode-map (kbd "M-t") 'counsel-gtags-find-definition)
+  (define-key counsel-gtags-mode-map (kbd "M-r") 'counsel-gtags-find-reference)
+  (define-key counsel-gtags-mode-map (kbd "M-s") 'counsel-gtags-find-symbol)
+  (define-key counsel-gtags-mode-map (kbd "M-,") 'counsel-gtags-go-backward))
 
-(global-set-key (kbd "M-;") 'helm-gtags-find-tag-from-here)   ;; M-; cycles to next result, after doing M-. C-M-. or C-M-,
-(global-set-key (kbd "M-.") 'helm-gtags-find-tag) ;; M-. finds tag
-(global-set-key [(control meta .)] 'helm-gtags-find-rtag)   ;; C-M-. find all references of tag
-(global-set-key [(control meta \,)] 'helm-gtags-find-symbol) ;; C-M-, find all usages of symbol.
 (setq prog-mode-hook
       '(lambda ()
-         (helm-gtags-mode 1)))
+         (counsel-gtags-mode 1)))
 
 
 

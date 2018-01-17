@@ -26,7 +26,6 @@
   (use-package counsel-projectile
     :config
     (counsel-projectile-mode 1)
-    (global-set-key (kbd "C-x C-g") 'counsel-projectile-ag)
-    ))
+    (global-set-key (kbd "C-x C-g") 'counsel-projectile-ag)))
 
 (provide 'ohai-ivy)

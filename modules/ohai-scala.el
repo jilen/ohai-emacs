@@ -21,20 +21,26 @@
 (use-package scala-mode
   :bind (("C-c C-f" . format-buffer-file))
   :config
-  (setq-default scala-indent:use-javadoc-style t)
-  (use-package sbt-mode
-    :config
-    (defun compile-sbt-project ()
-      (interactive)
-      "Compile the sbt project."
-      (when
-          (comint-check-proc (sbt:buffer-name))
-        (sbt-command "test:compile")))))
+  (setq-default scala-indent:use-javadoc-style t))
 
 (define-derived-mode sbt-build-mode scala-mode ".sbt")
 (add-to-list 'auto-mode-alist '("\\.sbt\\'" . sbt-build-mode))
 
 
+(use-package sbt-mode
+  :commands sbt-start sbt-command
+  :config
+  (substitute-key-definition
+   'minibuffer-complete-word
+   'self-insert-command
+   minibuffer-local-completion-map))
+
+(defun compile-sbt-project ()
+      (interactive)
+      "Compile the sbt project."
+      (when
+          (comint-check-proc (sbt:buffer-name))
+        (sbt-command "test:compile")))
 ;;(use-package helm-gtags)
 
 (global-set-key (kbd "C-c b") 'compile-sbt-project)

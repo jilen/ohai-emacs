@@ -34,16 +34,18 @@
 ;; Configure the light colour scheme.
 
 
-
 (defun ohai-appearance/light ()
   (interactive)
-  (use-package doom-themes :config
-    (load-theme 'doom-one-light t))
+  (use-package doom-themes
+    :config
+    (setq doom-soliarized-light-brighter-modeline nil)
+    (setq doom-soliarized-light-padded-modeline t)
+    (load-theme 'doom-solarized-light t))
   (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
-  (set-face-attribute 'linum nil :height 0.7
+  (set-face-attribute 'linum nil :height 0.8
                       :foreground (face-foreground 'default)
                       :background (face-background 'default))
-  (set-face-attribute 'linum-highlight-face nil :height 0.7)
+  (set-face-attribute 'linum-highlight-face nil :height 0.8)
   (set-face-attribute 'fringe nil :height 0.5
                       :foreground (face-foreground 'default)
                       :background (face-background 'default))
@@ -56,6 +58,13 @@
                       :background (face-background 'highlight))
   )
 
+(use-package spaceline
+  :config
+  (setq powerline-default-separator 'arrow)
+  (setq spaceline-window-numbers-unicode 1)
+  (setq spaceline-responsive nil)
+  (require 'spaceline-config)
+  (spaceline-spacemacs-theme))
 
 ;; Configure the dark colour scheme.
 (defun ohai-appearance/dark ()
@@ -73,10 +82,6 @@
   (run-hooks 'ohai-appearance/hook)
   (run-hooks 'ohai-appearance/dark-hook))
 
-(use-package spaceline-all-the-icons
-  :config
-  (setq spaceline-all-the-icons-separator-type 'arrow)
-  (spaceline-all-the-icons-theme))
 
 ;; Setup hooks to re-run after all modules have loaded, allowing
 ;; other modules to tweak the theme without having to wait
@@ -156,6 +161,7 @@
 ;; (eval-after-load "subword" '(diminish 'subword-mode))
 (eval-after-load "cider" '(diminish 'cider-mode))
 (eval-after-load "smartparens" '(diminish 'smartparens-mode))
+(eval-after-load "projectile" '(diminish 'projectile-mode))
 
 (eval-after-load "js2-mode"
   '(defadvice js2-mode (after js2-rename-modeline activate)
