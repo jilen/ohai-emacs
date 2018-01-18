@@ -14,8 +14,7 @@
       nil)))
 
 (defun output-message-sentinel (process msg)
-  (when (memq (process-status process) '(exit signal))
-    (message (concat (process-name process) " - " msg))))
+  ())
 
 (defun gtags-update ()
   (interactive)

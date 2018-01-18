@@ -33,15 +33,18 @@
   :config (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 ;; Configure the light colour scheme.
 
+(use-package rainbow-mode)
+
 
 (defun ohai-appearance/light ()
   (interactive)
   (use-package doom-themes
     :config
-    (setq doom-soliarized-light-brighter-modeline nil)
     (setq doom-soliarized-light-padded-modeline t)
-    (load-theme 'doom-solarized-light t))
-  (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
+    (load-theme 'doom-solarized-light t)
+    (set-face-foreground 'ivy-virtual (face-foreground 'default)))
+
+    (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
   (set-face-attribute 'linum nil :height 0.8
                       :foreground (face-foreground 'default)
                       :background (face-background 'default))
@@ -63,6 +66,7 @@
   (setq powerline-default-separator 'arrow)
   (setq spaceline-window-numbers-unicode 1)
   (setq spaceline-responsive nil)
+  (setq powerline-height 28)
   (require 'spaceline-config)
   (spaceline-spacemacs-theme))
 
@@ -162,6 +166,7 @@
 (eval-after-load "cider" '(diminish 'cider-mode))
 (eval-after-load "smartparens" '(diminish 'smartparens-mode))
 (eval-after-load "projectile" '(diminish 'projectile-mode))
+(eval-after-load "counsel-projectile" '(diminish 'counsel-projectile-mode))
 
 (eval-after-load "js2-mode"
   '(defadvice js2-mode (after js2-rename-modeline activate)
