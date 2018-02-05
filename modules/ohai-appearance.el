@@ -33,14 +33,16 @@
   :config (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 ;; Configure the light colour scheme.
 
-(use-package rainbow-mode)
-
+(use-package all-the-icons)
+(use-package all-the-icons-dired
+  :config
+  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
 
 (defun ohai-appearance/light ()
   (interactive)
   (use-package doom-themes
     :config
-    (setq doom-soliarized-light-padded-modeline t)
+    (setq doom-solarized-light-padded-modeline t)
     (load-theme 'doom-solarized-light t)
     (set-face-foreground 'ivy-virtual (face-foreground 'default)))
 
@@ -74,7 +76,8 @@
 (defun ohai-appearance/dark ()
   (interactive)
   (use-package doom-themes :config
-    (load-theme 'doom-one t))
+    (setq doom-soliarized-light-padded-modeline t)
+    (load-theme 'doom-molokai t))
   (set-face-attribute 'linum nil :height 0.7
                       :foreground (face-foreground 'default)
                       :background (face-background 'default))
@@ -150,9 +153,6 @@
   (window-numbering-mode 1))
 
 (use-package diminish)
-
-(use-package all-the-icons)
-(use-package all-the-icons-dired :config (add-hook 'dired-mode-hook (lambda() (all-the-icons-dired-mode))))
 
 (eval-after-load "eldoc" '(diminish 'eldoc-mode))
 (eval-after-load "autopair" '(diminish 'autopair-mode))

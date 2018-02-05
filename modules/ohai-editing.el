@@ -28,7 +28,9 @@
 ;; Select a region and C-M-' to place cursors on each line of the selection.
 ;; Bonus: <insert> key no longer activates overwrite mode.
 ;; What is that thing for anyway?
-(use-package auto-sudoedit)
+(use-package auto-sudoedit
+  :config
+  (auto-sudoedit-mode 1))
 (use-package origami
   :config (global-origami-mode 1)
   :bind(("C-c v". origami-toggle-node)))
@@ -135,14 +137,7 @@
 (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
 
 ;; A function for easily editing a file as root through TRAMP.
-(defun sudo-edit (&optional arg)
-  (interactive "p")
-  (if (or arg (not buffer-file-name))
-      (find-file (concat "/sudo:root@localhost:"
-                         (if (fboundp 'helm-read-file-name)
-                             (helm-read-file-name "File: ")
-                           (ido-read-file-name "File: "))))
-    (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
+
 
 ;; A key for intelligently shrinking whitespace.
 ;; See https://github.com/jcpetkovich/shrink-whitespace.el for details.
