@@ -33,11 +33,6 @@
   :config (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 ;; Configure the light colour scheme.
 
-(use-package all-the-icons)
-(use-package all-the-icons-dired
-  :config
-  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
-
 (defun ohai-appearance/light ()
   (interactive)
   (use-package doom-themes
@@ -46,7 +41,8 @@
     (load-theme 'doom-solarized-light t)
     (set-face-foreground 'ivy-virtual (face-foreground 'default)))
 
-    (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
+
+  (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
   (set-face-attribute 'linum nil :height 0.8
                       :foreground (face-foreground 'default)
                       :background (face-background 'default))
@@ -76,8 +72,8 @@
 (defun ohai-appearance/dark ()
   (interactive)
   (use-package doom-themes :config
-    (setq doom-soliarized-light-padded-modeline t)
-    (load-theme 'doom-molokai t))
+    (setq doom-one-padded-modeline t)
+    (load-theme 'doom-one t))
   (set-face-attribute 'linum nil :height 0.7
                       :foreground (face-foreground 'default)
                       :background (face-background 'default))
