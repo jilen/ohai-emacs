@@ -10,4 +10,28 @@
  '(ohai-personal-taste/window-state (quote normal))
  '(ohai/modules
    (quote
-    (ohai-gtags ohai-appearance ohai-general ohai-dashboard ohai-html ohai-navigation ohai-editing ohai-complete ohai-vue ohai-markdown ohai-javascript ohai-snippets ohai-codestyle ohai-dired ohai-project ohai-ivy ohai-flycheck ohai-git ohai-orgmode ohai-scala ohai-php ohai-help ohai-elisp ohai-fira-code ohai-haskell))))
+    (ohai-appearance
+     ohai-general
+     ohai-dashboard
+     ohai-html
+     ohai-navigation
+     ohai-editing
+     ohai-complete
+     ohai-vue
+     ohai-markdown
+     ohai-javascript
+     ohai-snippets
+     ohai-codestyle
+     ohai-dired
+     ohai-project
+     ohai-ivy
+     ohai-flycheck
+     ohai-git
+     ohai-orgmode
+     ohai-scala
+     ohai-php
+     ohai-help
+     ohai-elisp
+     ;; ohai-fira-code
+     ohai-haskell)))
+ )

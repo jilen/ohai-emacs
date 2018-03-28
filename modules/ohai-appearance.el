@@ -31,14 +31,15 @@
 
 (use-package rainbow-delimiters
   :config (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
-;; Configure the light colour scheme.
+
 
 (defun ohai-appearance/light ()
   (interactive)
   (use-package doom-themes
     :config
-    (setq doom-solarized-light-padded-modeline t)
-    (load-theme 'doom-solarized-light t)
+
+    (setq doom-one-light-padded-modeline t)
+    (load-theme 'doom-one-light t)
     (set-face-foreground 'ivy-virtual (face-foreground 'default)))
 
 
@@ -56,24 +57,20 @@
 
 (with-eval-after-load "web-mode"
   (set-face-attribute 'web-mode-current-element-highlight-face nil
-                      :background (face-background 'highlight))
-  )
+                      :background (face-background 'highlight)))
 
-(use-package spaceline
+(use-package moody
   :config
-  (setq powerline-default-separator 'arrow)
-  (setq spaceline-window-numbers-unicode 1)
-  (setq spaceline-responsive nil)
-  (setq powerline-height 28)
-  (require 'spaceline-config)
-  (spaceline-spacemacs-theme))
+  (setq x-underline-at-descent-line t)
+  (moody-replace-mode-line-buffer-identification)
+  (moody-replace-vc-mode))
 
 ;; Configure the dark colour scheme.
 (defun ohai-appearance/dark ()
   (interactive)
   (use-package doom-themes :config
-    (setq doom-one-padded-modeline t)
-    (load-theme 'doom-one t))
+    (setq doom-vibrant-padded-modeline t)
+    (load-theme 'doom-vibrant t))
   (set-face-attribute 'linum nil :height 0.7
                       :foreground (face-foreground 'default)
                       :background (face-background 'default))
@@ -141,28 +138,6 @@
 
 ;; Highlight matching braces.
 (show-paren-mode 1)
-
-
-(use-package window-numbering :config
-  (defun window-numbering-install-mode-line (&optional position)
-    "Do nothing.")
-  (window-numbering-mode 1))
-
-(use-package diminish)
-
-(eval-after-load "eldoc" '(diminish 'eldoc-mode))
-(eval-after-load "autopair" '(diminish 'autopair-mode))
-(eval-after-load "abbrev" '(diminish 'abbrev-mode))
-(eval-after-load "js2-highlight-vars" '(diminish 'js2-highlight-vars-mode))
-(eval-after-load "mmm-mode" '(diminish 'mmm-mode))
-(eval-after-load "skewer-html" '(diminish 'skewer-html-mode))
-(eval-after-load "skewer-mode" '(diminish 'skewer-mode))
-(eval-after-load "auto-indent-mode" '(diminish 'auto-indent-minor-mode))
-;; (eval-after-load "subword" '(diminish 'subword-mode))
-(eval-after-load "cider" '(diminish 'cider-mode))
-(eval-after-load "smartparens" '(diminish 'smartparens-mode))
-(eval-after-load "projectile" '(diminish 'projectile-mode))
-(eval-after-load "counsel-projectile" '(diminish 'counsel-projectile-mode))
 
 (eval-after-load "js2-mode"
   '(defadvice js2-mode (after js2-rename-modeline activate)

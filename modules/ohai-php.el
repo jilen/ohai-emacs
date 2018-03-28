@@ -7,12 +7,13 @@
 (defvar php-electric-pairs '((?\{ . ?\})) "Electric pairs for php-mode.")
 
 (defun ohai-php-mode-init ()
+  (setq tab-width 2)
   (setq c-basic-offset 2))
 
 (use-package php-mode
   :config
-  (setq flycheck-php-executable "php56")
-  (add-hook 'php-mode-hook 'ohai-php-mode-init))
+  (setq flycheck-php-executable "php56"))
+(add-hook 'php-mode-hook 'ohai-php-mode-init)
 
 (provide 'ohai-php)
 
