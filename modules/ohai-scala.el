@@ -6,20 +6,7 @@
 ;;; Code:
 (require 'ohai-lib)
 
-(defun format-file(file)
-  "format current file use scalafmt"
-  (let ((config-file (expand-file-name (concat (sbt:find-root) ".scalariform.conf" ))))
-    (shell-command (concat "ng scalariform.commandline.Main  --preferenceFile=" config-file " " file " >/dev/null")))
-  )
-
-(defun format-buffer-file()
-  (interactive)
-  "format current buffer file"
-  (format-file (buffer-file-name (current-buffer)))
-  (revert-buffer t t))
-
 (use-package scala-mode
-  :bind (("C-c C-f" . format-buffer-file))
   :config
   (setq-default scala-indent:use-javadoc-style t))
 

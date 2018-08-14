@@ -4,6 +4,7 @@
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t)
+  (set-face-foreground 'ivy-virtual (face-foreground 'default))
   (global-set-key "\C-s" 'swiper)
   (global-set-key (kbd "C-c C-r") 'ivy-resume)
   (global-set-key (kbd "<f6>") 'ivy-resume)
@@ -25,7 +26,7 @@
 (eval-after-load "projectile"
   (use-package counsel-projectile
     :config
-    (counsel-projectile-mode 1)
+    (setq counsel-projectile-mode t)
     (global-set-key (kbd "C-x C-g") 'counsel-projectile-ag)))
 
 (provide 'ohai-ivy)

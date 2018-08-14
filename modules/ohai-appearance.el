@@ -23,6 +23,7 @@
 (require 'ohai-package)
 (require 'ohai-personal-taste)
 (require 'term)
+
 ;; Get rid of the training wheels, if you're ready for it.
 (when (not ohai-personal-taste/training-wheels)
   (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
@@ -37,10 +38,9 @@
   (interactive)
   (use-package doom-themes
     :config
+     ;;(setq doom-opera-light-padded-modeline t)
+    (load-theme 'doom-solarized-light t))
 
-    (setq doom-one-light-padded-modeline t)
-    (load-theme 'doom-one-light t)
-    (set-face-foreground 'ivy-virtual (face-foreground 'default)))
 
 
   (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
@@ -59,11 +59,17 @@
   (set-face-attribute 'web-mode-current-element-highlight-face nil
                       :background (face-background 'highlight)))
 
-(use-package moody
-  :config
-  (setq x-underline-at-descent-line t)
-  (moody-replace-mode-line-buffer-identification)
-  (moody-replace-vc-mode))
+;; (use-package moody
+;;   :config
+;;   (setq moody-mode-line-height 28)
+;;   (setq x-underline-at-descent-line t)
+;;   (moody-replace-mode-line-buffer-identification)
+;;   (moody-replace-vc-mode))
+
+(use-package doom-modeline
+      :ensure t
+      :defer t
+      :hook (after-init . doom-modeline-init))
 
 ;; Configure the dark colour scheme.
 (defun ohai-appearance/dark ()

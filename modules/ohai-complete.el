@@ -42,12 +42,12 @@
   ;; Sort completion candidates that already occur in the current
   ;; buffer at the top of the candidate list.
   (setq company-transformers '(company-sort-by-occurrence))
-  ;; Show documentation where available for selected completion
-  ;; after a short delay.
-  (use-package company-quickhelp
-    :config
-    (setq company-quickhelp-delay 1)
-    (company-quickhelp-mode 1))
+  ;; ;; Show documentation where available for selected completion
+  ;; ;; after a short delay.
+  ;; (use-package company-quickhelp
+  ;;   :config
+  ;;   (setq company-quickhelp-delay 1)
+  ;;   (company-quickhelp-mode 1))
   ;; Add a completion source for emoji. 😸
   (use-package company-emoji
     :config

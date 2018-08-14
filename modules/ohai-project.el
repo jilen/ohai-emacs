@@ -26,11 +26,12 @@
 ;; Learn about Projectile: http://batsov.com/projectile/
 (use-package projectile
   :demand t
-  :commands projectile-global-mode
   :config
-  (setq projectile-mode-line "Projectile")
+  (setq projectile-mode-line "Prj")
   (setq projectile-use-git-grep t)
-  (projectile-global-mode))
+  (projectile-global-mode 1)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  )
 
 ;; Use ibuffer instead of list-buffers (C-x C-b) and sort by project.
 (use-package ibuffer-projectile
