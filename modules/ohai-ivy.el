@@ -26,7 +26,7 @@
 (eval-after-load "projectile"
   (use-package counsel-projectile
     :config
-    (setq counsel-projectile-mode t)
-    (global-set-key (kbd "C-x C-g") 'counsel-projectile-ag)))
+    (counsel-projectile-mode 1)
+    ))
 
 (provide 'ohai-ivy)
