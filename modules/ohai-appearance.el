@@ -33,12 +33,20 @@
 (use-package rainbow-delimiters
   :config (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
+(use-package winum
+  :config
+  (winum-mode)
+  )
 
 (defun ohai-appearance/light ()
   (interactive)
   (use-package doom-themes
     :config
-    (load-theme 'doom-solarized-light t)
+    (load-theme 'doom-nord-light t)
+
+    (set-face-attribute font-lock-type-face  nil :slant 'italic)
+    (set-face-attribute font-lock-comment-face  nil :slant 'italic)
+    (set-face-attribute font-lock-keyword-face nil :slant 'italic)
 
     (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
     (set-face-attribute 'linum nil :height 0.8
@@ -55,13 +63,6 @@
 (with-eval-after-load "web-mode"
   (set-face-attribute 'web-mode-current-element-highlight-face nil
                       :background (face-background 'highlight)))
-
-;; (use-package moody
-;;   :config
-;;   (setq moody-mode-line-height 28)
-;;   (setq x-underline-at-descent-line t)
-;;   (moody-replace-mode-line-buffer-identification)
-;;   (moody-replace-vc-mode))
 
 (use-package doom-modeline
       :ensure t

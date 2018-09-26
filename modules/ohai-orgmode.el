@@ -25,6 +25,20 @@
 (use-package org
   :ensure org-plus-contrib
   :config
+   (setq org-latex-pdf-process
+        '("xelatex --shell-escape -interaction nonstopmode -output-directory %o %f"
+          "xelatex --shell-escape -interaction nonstopmode -output-directory %o %f"
+          "xelatex --shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+  (use-package graphviz-dot-mode
+    :config
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((dot . t)))
+    (setq org-plantuml-jar-path (expand-file-name "~/.local/share/plantuml/plantuml.jar"))
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((plantuml . t))))
   ;; Stop org-mode from highjacking shift-cursor keys.
   (setq org-replace-disputed-keys t)
   ;; Always use visual-line-mode in org-mode, and wrap it at column 80.
@@ -42,5 +56,7 @@
     :config
     (with-eval-after-load "org"
       (define-key org-mode-map (kbd "C-c M-l") 'org-cliplink))))
+
+
 
   (provide 'ohai-orgmode)
