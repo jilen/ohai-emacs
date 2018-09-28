@@ -42,12 +42,10 @@
   (interactive)
   (use-package doom-themes
     :config
-    (load-theme 'doom-nord-light t)
-
-    (set-face-attribute font-lock-type-face  nil :slant 'italic)
-    (set-face-attribute font-lock-comment-face  nil :slant 'italic)
-    (set-face-attribute font-lock-keyword-face nil :slant 'italic)
-
+    (setq doom-one-light-padded-modeline t)
+    (load-theme 'doom-one-light t)
+    (set-face-attribute 'font-lock-type-face nil :slant 'italic)
+    (set-face-attribute 'font-lock-comment-face nil :slant 'italic)
     (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
     (set-face-attribute 'linum nil :height 0.8
                         :foreground (face-foreground 'default)

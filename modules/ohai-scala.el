@@ -10,27 +10,43 @@
   :config
   (setq-default scala-indent:use-javadoc-style t))
 
-(define-derived-mode sbt-build-mode scala-mode ".sbt")
-(add-to-list 'auto-mode-alist '("\\.sbt\\'" . sbt-build-mode))
+
 
 
 (use-package sbt-mode
   :commands sbt-start sbt-command
   :config
+
   (substitute-key-definition
    'minibuffer-complete-word
    'self-insert-command
    minibuffer-local-completion-map))
 
-(defun compile-sbt-project ()
-      (interactive)
-      "Compile the sbt project."
-      (when
-          (comint-check-proc (sbt:buffer-name))
-        (sbt-command "test:compile")))
-;;(use-package helm-gtags)
+(require 'sbt-mode-project)
 
-(global-set-key (kbd "C-c b") 'compile-sbt-project)
+(defun scalafmt ()
+  (interactive)
+  (with-output-to-string
+    (with-current-buffer
+        standard-output
+      (process-file shell-file-name nil '(t nil)  nil shell-command-switch "ng org.scalafmt.cli.Cli"))))
+
+
+(defun format-project ()
+  (interactive)
+  (let (
+        (default-directory (sbt:find-root)))
+    (scalafmt)
+    ))
+
+
+(global-set-key (kbd "C-c b f") 'format-project)
+(global-set-key (kbd "C-c b b") 'bloop-compile)
+(global-set-key (kbd "C-c b r") 'bloop-compile-root)
+
+(define-derived-mode sbt-build-mode scala-mode ".sbt")
+(add-to-list 'auto-mode-alist '("\\.sbt\\'" . sbt-build-mode))
+(require 'ohai-bloop)
 (provide 'ohai-scala)
 
 ;;; ohai-scala.el ends here
