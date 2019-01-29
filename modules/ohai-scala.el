@@ -4,14 +4,12 @@
 ;; Bring scala development related modes
 
 ;;; Code:
+
 (require 'ohai-lib)
 
 (use-package scala-mode
   :config
   (setq-default scala-indent:use-javadoc-style t))
-
-
-
 
 (use-package sbt-mode
   :commands sbt-start sbt-command
@@ -36,8 +34,7 @@
   (interactive)
   (let (
         (default-directory (sbt:find-root)))
-    (scalafmt)
-    ))
+    (scalafmt)))
 
 
 (global-set-key (kbd "C-c b f") 'format-project)
@@ -47,6 +44,7 @@
 (define-derived-mode sbt-build-mode scala-mode ".sbt")
 (add-to-list 'auto-mode-alist '("\\.sbt\\'" . sbt-build-mode))
 (require 'ohai-bloop)
+
 (provide 'ohai-scala)
 
 ;;; ohai-scala.el ends here

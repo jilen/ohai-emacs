@@ -63,9 +63,5 @@
                ("C-\\" . company-try-hard)))
   :diminish company-mode)
 
-(use-package company-posframe
-  :config
-  (company-posframe-mode 1))
-
 
 (provide 'ohai-complete)

@@ -28,13 +28,7 @@
 
 ;; Install Flycheck.
 (use-package flycheck
-  :config
-  ;; Start it automatically for all modes except ELisp mode,
-  ;; where the linter is just designed to make you mad.
-  (add-hook 'find-file-hook
-            (lambda ()
-              (when (not (equal 'emacs-lisp-mode major-mode))
-                (flycheck-mode)))))
+  :init (global-flycheck-mode))
 
 ;; Turn the modeline red when Flycheck has errors.
 (use-package flycheck-color-mode-line

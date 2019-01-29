@@ -37,19 +37,11 @@
 (defun bloop-directory (root)
   (file-name-as-directory (concat root ".bloop")))
 
-(defun bloop-find-dir (file)
-
+(defun bloop-find-root (file)
   (file-name-as-directory (or (locate-dominating-file file ".bloop")
                               (error (concat "Can't find `.bloop' directory. "
                                              "Have you generated bloop config for this project? "
-                                             "https://scalacenter.github.io/bloop/docs/installation/"))))
-  )
-
-(defun bloop-find-root (file)
-  (let ((dir (bloop-find-dir file)))
-    (if dir dir
-      (bloop-find-root (file-name-directory file))))
-  )
+                                             "https://scalacenter.github.io/bloop/docs/installation/")))))
 
 (defun bloop-project-files (bloop-dir)
   (directory-files bloop-dir t "\\.json$"))
@@ -65,7 +57,7 @@
     (cons name (mapcar 'file-name-as-directory dirs))))
 
 (defun bloop-longest-string (func strings)
-  (let ((sorted (sort strings (lambda (x y) (> (length (funcall func x)) (length (funcall func y)))))))
+  (let ((sorted (sort strings (lambda (x y) (> (length (func x)) (length (func y)))))))
     (car sorted)))
 
 (defun bloop-project-match-file (project file)
@@ -74,15 +66,12 @@
          (filtered (seq-filter (lambda (path) (string-prefix-p path file)) sources)))
     (cons name (bloop-longest-string 'identity filtered))))
 
-(defun bloop-read-projects (root file)
+(defun bloop-find-project (root file)
   (let* ((project-files (bloop-project-files (bloop-directory root)))
          (projects (mapcar 'bloop-read-project-file project-files))
-         (sources (mapcar (lambda (project) (bloop-project-match-file project file)) projects)))
-    sources))
-
-(defun bloop-find-project (root file)
-  (let* (
-         (project (bloop-longest-string 'cdr (bloop-read-projects root file))))
+         (sources (mapcar (lambda (project) (bloop-project-match-file project file)) projects))
+         (filtered (seq-filter (lambda (x) (cdr x)) sources))
+         (project (bloop-longest-string 'cdr filtered)))
     project))
 
 (defun bloop-current-project (root)
@@ -144,18 +133,13 @@
          (target-test (concat "*" (replace-regexp-in-string ".scala" "" (car (last (split-string (buffer-file-name) "/")))))))
     (bloop-exec nil root "test" "--reporter" bloop-reporter "--only" target-test project-name)))
 
-(defun bloop-compile-root ()
-  (interactive)
-  (let* ((root (bloop-find-root (buffer-file-name))))
-    (bloop-exec nil root "compile" "--reporter" bloop-reporter "root-test"))
-  )
-
 (defun bloop-show-current-project ()
   (interactive)
   (let* ((root (bloop-find-root (buffer-file-name))))
-    (message (format "%S %S" root (bloop-current-project "root-test")))))
+    (message (format "%S %S" root (bloop-current-project root)))))
 
-
+(global-set-key (kbd "C-c b c") 'bloop-compile)
+(global-set-key (kbd "C-c b q") 'bloop-show-current-project)
 
 (provide 'ohai-bloop)
 

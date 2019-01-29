@@ -29,7 +29,6 @@
   :config
   (setq projectile-mode-line "Prj")
   (setq projectile-use-git-grep t)
-  (setq projectile-indexing-method 'git)
   (projectile-global-mode 1)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   )
