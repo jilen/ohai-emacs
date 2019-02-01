@@ -57,7 +57,7 @@
     (cons name (mapcar 'file-name-as-directory dirs))))
 
 (defun bloop-longest-string (func strings)
-  (let ((sorted (sort strings (lambda (x y) (> (length (func x)) (length (func y)))))))
+  (let ((sorted (sort strings (lambda (x y) (> (length (funcall func x)) (length (funcall func y)))))))
     (car sorted)))
 
 (defun bloop-project-match-file (project file)
@@ -98,16 +98,20 @@
           (if (comint-check-proc (current-buffer))
               (error "A bloop command is still running!")
             ;; TODO: Maybe save buffers?
-            (cd root)
-            (erase-buffer)
-            (insert (concat root "$ " full-command))
-            (newline 2)
-            (comint-mode)
-            ;; (compilation-shell-minor-mode)
-            (comint-exec (current-buffer) buffer-name bloop-program-name nil (cons command args))
-            (current-buffer)))
-      (let ((compilation-buffer-name-function (lambda (mode) buffer-name)))
-        (cd root)
+            (let ((default-root root))
+              (erase-buffer)
+              (insert (concat root "$ " full-command))
+              (newline 2)
+              (comint-mode)
+              ;; (compilation-shell-minor-mode)
+              (comint-exec (current-buffer) buffer-name bloop-program-name nil (cons command args))
+              (current-buffer)
+              )
+            )
+          )
+      (let (
+            (compilation-buffer-name-function (lambda (mode) buffer-name))
+            (default-directory root))
         (compile full-command)))))
 
 
