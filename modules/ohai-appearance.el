@@ -42,7 +42,7 @@
   (interactive)
   (use-package doom-themes
     :config
-    (setq doom-one-light-padded-modeline t)
+    ;;(setq doom-one-light-padded-modeline t)
     (load-theme 'doom-one-light t)
     (set-face-attribute 'font-lock-type-face nil :slant 'italic)
     (set-face-attribute 'font-lock-comment-face nil :slant 'italic)

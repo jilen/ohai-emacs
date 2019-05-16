@@ -136,6 +136,18 @@
 
 (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
 
+(setq
+   backup-by-copying t      ; don't clobber symlinks
+   backup-directory-alist
+    '(("." . "~/.cache/emacs/backup/"))    ; don't litter my fs tree
+   delete-old-versions t
+   kept-new-versions 6
+   kept-old-versions 2
+   version-control t)       ; use versioned backups
+
+(setq auto-save-file-name-transforms
+  `((".*" "~/.cache/emacs/autosave" t)))
+
 ;; A function for easily editing a file as root through TRAMP.
 
 
@@ -153,10 +165,12 @@
   :diminish volatile-highlights-mode)
 
 (eval-after-load 'semantic
-    (add-hook 'semantic-mode-hook
-              (lambda ()
-                (dolist (x (default-value 'completion-at-point-functions))
-                  (when (string-prefix-p "semantic-" (symbol-name x))
-                    (remove-hook 'completion-at-point-functions x))))))
+  (add-hook 'semantic-mode-hook
+            (lambda ()
+              (dolist (x (default-value 'completion-at-point-functions))
+                (when (string-prefix-p "semantic-" (symbol-name x))
+                  (remove-hook 'completion-at-point-functions x))))))
+
+
 
 (provide 'ohai-editing)

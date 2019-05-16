@@ -25,17 +25,22 @@
 (use-package org
   :ensure org-plus-contrib
   :config
-   (setq org-latex-pdf-process
+  (setq org-latex-pdf-process
         '("xelatex --shell-escape -interaction nonstopmode -output-directory %o %f"
           "xelatex --shell-escape -interaction nonstopmode -output-directory %o %f"
           "xelatex --shell-escape -interaction nonstopmode -output-directory %o %f"))
 
+  (use-package plantuml-mode
+    :config
+    (setq org-plantuml-jar-path (expand-file-name "~/.local/share/plantuml/plantuml.jar"))
+    (setq plantuml-jar-path (expand-file-name "~/.local/share/plantuml/plantuml.jar"))
+    )
   (use-package graphviz-dot-mode
     :config
     (org-babel-do-load-languages
      'org-babel-load-languages
      '((dot . t)))
-    (setq org-plantuml-jar-path (expand-file-name "~/.local/share/plantuml/plantuml.jar"))
+
     (org-babel-do-load-languages
      'org-babel-load-languages
      '((plantuml . t))))
@@ -59,4 +64,4 @@
 
 
 
-  (provide 'ohai-orgmode)
+(provide 'ohai-orgmode)

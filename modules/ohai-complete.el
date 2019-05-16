@@ -33,6 +33,7 @@
   (setq company-global-modes '(not term-mode))
   ;; Give Company a decent default configuration.
   (setq company-minimum-prefix-length 2
+        company-idle-delay 0
         company-selection-wrap-around t
         company-show-numbers t
         company-tooltip-align-annotations t
@@ -44,11 +45,12 @@
   (setq company-transformers '(company-sort-by-occurrence))
   ;; ;; Show documentation where available for selected completion
   ;; ;; after a short delay.
-  ;; (use-package company-quickhelp
-  ;;   :config
-  ;;   (setq company-quickhelp-delay 1)
-  ;;   (company-quickhelp-mode 1))
-  ;; Add a completion source for emoji. 😸
+  (use-package company-quickhelp
+    :config
+    (setq company-quickhelp-delay 1)
+    (company-quickhelp-mode 1))
+
+  ;;Add a completion source for emoji. 😸
   (use-package company-emoji
     :config
     (company-emoji-init))

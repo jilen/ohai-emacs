@@ -3,9 +3,10 @@
 ;;; Commentary:
 ;;
 
+(use-package eglot)
 (use-package kotlin-mode
   :config
-  (require 'ohai-eglot)
+  (setq-default kotlin-tab-width 4)
   (add-hook 'kotlin-mode-hook 'eglot-ensure))
 
 
