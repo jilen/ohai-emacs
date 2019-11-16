@@ -30,6 +30,20 @@
           "xelatex --shell-escape -interaction nonstopmode -output-directory %o %f"
           "xelatex --shell-escape -interaction nonstopmode -output-directory %o %f"))
 
+  ;; Setup beamer
+  (setq org-latex-listings 'minted)
+  (require 'ox-latex)
+  (add-to-list 'org-latex-classes
+               '("beamer"
+                 "\\documentclass\[presentation\]\{beamer\}
+                 \[NO-DEFAULT-PACKAGES]
+                 \[PACKAGES]
+                 \[EXTRA]
+                 \\usepackage{default}"
+                 ("\\section\{%s\}" . "\\section*\{%s\}")
+                 ("\\subsection\{%s\}" . "\\subsection*\{%s\}")
+                 ("\\subsubsection\{%s\}" . "\\subsubsection*\{%s\}")))
+
   (use-package plantuml-mode
     :config
     (setq org-plantuml-jar-path (expand-file-name "~/.local/share/plantuml/plantuml.jar"))

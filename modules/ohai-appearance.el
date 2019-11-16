@@ -38,12 +38,14 @@
   (winum-mode)
   )
 
+
+
 (defun ohai-appearance/light ()
+  "Apply light style."
   (interactive)
-  (use-package doom-themes
+  (use-package gruvbox-theme
     :config
-    ;;(setq doom-one-light-padded-modeline t)
-    (load-theme 'doom-one-light t)
+    (load-theme 'gruvbox-light-medium t)
     (set-face-attribute 'font-lock-type-face nil :slant 'italic)
     (set-face-attribute 'font-lock-comment-face nil :slant 'italic)
     (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
@@ -64,11 +66,11 @@
 
 (use-package doom-modeline
       :ensure t
-      :defer t
-      :hook (after-init . doom-modeline-init))
+      :hook (after-init . doom-modeline-mode))
 
-;; Configure the dark colour scheme.
+;;Configure the dark colour scheme.
 (defun ohai-appearance/dark ()
+  "Apply dark style."
   (interactive)
   (use-package doom-themes :config
     (setq doom-vibrant-padded-modeline t)
@@ -175,7 +177,31 @@
     (ohai-appearance/dark))
    ((equal ohai-personal-taste/style 'light)
     (ohai-appearance/light))))
-
 (ohai-appearance/apply-style)
+
+
+
+(defun default-mono-font ()
+  "Get display monospace font."
+  (replace-regexp-in-string "\n$" "" (shell-command-to-string "fc-match -f '%{family}' 'monospace'|awk -F ',' '{print $1}'")))
+
+(set-frame-font (default-mono-font) nil t)
+(set-face-attribute 'default nil
+                    ;:family (default-mono-font)
+                    :height 120)
+
+(use-package centaur-tabs
+  :demand
+  :config
+  (setq centaur-tabs-set-icons t)
+  (setq centaur-tabs-style "bar")
+  (centaur-tabs-mode t)
+  (centaur-tabs-group-by-projectile-project)
+  (centaur-tabs-build-helm-source)
+  (centaur-tabs-headline-match)
+  :bind
+  ("C-<prior>" . centaur-tabs-backward)
+  ("C-<next>" . centaur-tabs-forward))
+
 (provide 'ohai-appearance)
 ;;; ohai-appearance.el ends here

@@ -9,37 +9,55 @@
 
 (use-package scala-mode
   :config
+  (setq-default sbt:program-options '("-Djline.terminal=none" "-Dsbt.supershell=false"))
   (setq-default scala-indent:use-javadoc-style t))
 
 (use-package sbt-mode
   :commands sbt-start sbt-command
   :config
 
+  (add-hook 'sbt-mode-hook
+            (lambda ()
+              (setq prettify-symbols-alist
+                    `((,(expand-file-name (directory-file-name default-directory)) . ?⌂)
+                      (,(expand-file-name "~") . ?~)))
+              (prettify-symbols-mode t)))
+
   (substitute-key-definition
    'minibuffer-complete-word
    'self-insert-command
    minibuffer-local-completion-map))
 
+(defun sbt-compile ()
+  "Compile sbt project."
+  (interactive)
+  (sbt-command "test:compile")
+  )
+
 (require 'sbt-mode-project)
 
-(defun scalafmt ()
-  (interactive)
-  (with-output-to-string
-    (with-current-buffer
-        standard-output
-      (process-file shell-file-name nil '(t nil)  nil shell-command-switch "ng org.scalafmt.cli.Cli"))))
-
+(defun scalafmt (p)
+  "Format specified file.  P is the file path."
+  (shell-command (concat "scalafmt " p)))
 
 (defun format-project ()
+  "Format project."
   (interactive)
   (let (
         (default-directory (sbt:find-root)))
-    (scalafmt)))
+    (scalafmt (buffer-file-name (current-buffer)))))
 
+(defun sbt-test ()
+  "Test current file."
+  (interactive)
+  (sbt-command (concat "testOnly " "*"
+                       (file-name-base
+                        (buffer-file-name
+                         (current-buffer))))))
 
 (global-set-key (kbd "C-c b f") 'format-project)
 (global-set-key (kbd "C-c b b") 'bloop-compile)
-(global-set-key (kbd "C-c b r") 'bloop-compile-root)
+(global-set-key (kbd "C-c b t") 'bloop-test-only)
 
 (define-derived-mode sbt-build-mode scala-mode ".sbt")
 (add-to-list 'auto-mode-alist '("\\.sbt\\'" . sbt-build-mode))

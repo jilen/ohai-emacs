@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: import circe generic
+# key: icg
+# --
+
+import io.circe.generic._
+import zd.common.utils.CirceCodecs._

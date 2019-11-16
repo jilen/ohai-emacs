@@ -33,17 +33,13 @@
   (setq company-global-modes '(not term-mode))
   ;; Give Company a decent default configuration.
   (setq company-minimum-prefix-length 2
-        company-idle-delay 0
         company-selection-wrap-around t
         company-show-numbers t
         company-tooltip-align-annotations t
         company-require-match nil
         company-dabbrev-downcase nil
         company-dabbrev-ignore-case nil)
-  ;; Sort completion candidates that already occur in the current
-  ;; buffer at the top of the candidate list.
-  (setq company-transformers '(company-sort-by-occurrence))
-  ;; ;; Show documentation where available for selected completion
+
   ;; ;; after a short delay.
   (use-package company-quickhelp
     :config
@@ -64,6 +60,5 @@
     (bind-keys :map company-active-map
                ("C-\\" . company-try-hard)))
   :diminish company-mode)
-
 
 (provide 'ohai-complete)

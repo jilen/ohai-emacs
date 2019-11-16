@@ -39,14 +39,15 @@ codepoints starting from codepoint-start."
         (my-correct-symbol-bounds (my-ligature-list ligs #Xe100))))
 
 (defun active-ligs()
-    (seq-remove (lambda (pair) (member (car pair) exclude-ligatures)) fira-code-ligatures)
-    )
+    (seq-remove (lambda (pair) (member (car pair) exclude-ligatures)) fira-code-ligatures))
 
 (defun set-fira-code-ligatures ()
   "Add hasklig ligatures for use with prettify-symbols-mode."
   (setq prettify-symbols-alist
         (append (active-ligs) prettify-symbols-alist))
-  (prettify-symbols-mode))
+  (set-fontset-font t '(#Xe100 . #Xe189) "Cascadia Emacs")
+  (prettify-symbols-mode)
+  )
 
 (add-hook 'prog-mode-hook 'set-fira-code-ligatures)
 
