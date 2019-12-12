@@ -142,6 +142,13 @@
   (let* ((root (bloop-find-root (buffer-file-name))))
     (message (format "%S %S" root (bloop-current-project root)))))
 
+(add-hook 'compilation-mode-hook
+            (lambda ()
+              (setq prettify-symbols-alist
+                    `((,(expand-file-name (directory-file-name default-directory)) . ?⌂)
+                      (,(expand-file-name "~") . ?~)))
+              (prettify-symbols-mode t)))
+
 (global-set-key (kbd "C-c b c") 'bloop-compile)
 (global-set-key (kbd "C-c b q") 'bloop-show-current-project)
 

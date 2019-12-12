@@ -40,12 +40,22 @@
   "Format specified file.  P is the file path."
   (shell-command (concat "scalafmt " p)))
 
+(defun scalariform (c f)
+  "Format specified file. C is the config, F is the file path."
+  (shell-command (concat "scalariform -q " "--preferenceFile=" c " " f))
+  )
+
 (defun format-project ()
   "Format project."
   (interactive)
   (let (
-        (default-directory (sbt:find-root)))
-    (scalafmt (buffer-file-name (current-buffer)))))
+        (default-directory (sbt:find-root))
+        )
+    (cond
+     ((file-exists-p ".scalafmt.conf") (scalafmt (buffer-file-name (current-buffer))))
+     ((file-exists-p ".scalariform.conf") (scalariform ".scalariform.conf" (buffer-file-name (current-buffer))))
+     ))
+  )
 
 (defun sbt-test ()
   "Test current file."

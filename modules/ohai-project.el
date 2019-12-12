@@ -1,3 +1,6 @@
+;;; ohai-project.el --- project
+;;; Commentary:
+;;
 ;;; -*- lexical-binding: t -*-
 ;;; ohai-project.el --- Your personal everything manager.
 
@@ -44,3 +47,4 @@
                 (ibuffer-do-sort-by-alphabetic)))))
 
 (provide 'ohai-project)
+;;; ohai-project.el ends here

@@ -23,3 +23,5 @@ ac-comphist.dat
 /emojis
 /abbrev_defs
 /.cask
+.cache/
+\#recentf\#
