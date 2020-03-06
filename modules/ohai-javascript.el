@@ -38,15 +38,19 @@
          ("\\.ejs\\'" . js2-mode))
   :interpreter "node"
   :commands js2-mode
+  :config
+  (setq js2-strict-missing-semi-warning nil)
+  (setq js2-strict-trailing-comma-warning nil)
+  (setq js2-strict-cond-assign-warning nil)
+  (setq js2-missing-semi-one-line-override nil)
   )
 
-(use-package lsp-mode
+(use-package flycheck
+  :hook ((js2-mode . flycheck-mode))
   :config
-  (eval-after-load 'js-mode
-            '(add-hook 'js-mode-hook #'lsp))
-  (eval-after-load 'js2-mode
-    '(add-hook 'js2-mode-hook #'lsp))
-  )
+  (setq-default flycheck-disabled-checkers
+                (append flycheck-disabled-checkers
+                        '(javascript-jshint))))
 
 (use-package add-node-modules-path
   :config

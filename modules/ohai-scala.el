@@ -65,6 +65,12 @@
                         (buffer-file-name
                          (current-buffer))))))
 
+(use-package eglot
+  :config
+  (add-to-list 'eglot-server-programs '(scala-mode . ("metals-emacs")))
+  ;; (optional) Automatically start metals for Scala files.
+  )
+
 (global-set-key (kbd "C-c b f") 'format-project)
 (global-set-key (kbd "C-c b b") 'bloop-compile)
 (global-set-key (kbd "C-c b t") 'bloop-test-only)

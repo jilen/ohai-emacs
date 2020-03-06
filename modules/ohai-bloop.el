@@ -44,7 +44,8 @@
                                              "https://scalacenter.github.io/bloop/docs/installation/")))))
 
 (defun bloop-project-files (bloop-dir)
-  (directory-files bloop-dir t "\\.json$"))
+  (seq-filter (lambda (str) (not (string-match-p "\\.settings\\.json$" str))) (directory-files bloop-dir t "\\.json$"))
+  )
 
 (defun bloop-read-project-file (project-file)
   (let* ((json-object-type 'hash-table)

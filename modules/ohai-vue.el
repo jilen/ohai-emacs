@@ -13,15 +13,25 @@
 
 (add-hook 'vue-mode-hook #'add-node-modules-path)
 
-(use-package lsp-mode
+
+(use-package eglot
   :config
-  (use-package lsp-ui :commands lsp-ui-mode)
-  (use-package company-lsp :commands company-lsp)
-  (use-package helm-lsp :commands helm-lsp-workspace-symbol)
-  (add-hook 'vue-mode-hook #'lsp)
-  :commands (lsp lsp-deferred))
+  (defclass eglot-vls (eglot-lsp-server) ()
+    :documentation "Vue Language Server.")
+
+  (add-to-list 'eglot-server-programs
+               '(vue-mode . (eglot-vls . ("vls" "--stdio")))
+               )
+
+  (cl-defmethod eglot-initialization-options ((server eglot-vls))
+    "Passes through required vetur initialization options to VLS."
+    '())
+  )
+
+
 
 (with-eval-after-load 'flycheck
+  (advice-add 'flycheck-eslint-config-exists-p :override (lambda() t))
   (flycheck-add-mode 'javascript-eslint 'vue-mode))
 
 
