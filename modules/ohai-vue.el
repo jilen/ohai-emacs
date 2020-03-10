@@ -28,8 +28,6 @@
     '())
   )
 
-
-
 (with-eval-after-load 'flycheck
   (advice-add 'flycheck-eslint-config-exists-p :override (lambda() t))
   (flycheck-add-mode 'javascript-eslint 'vue-mode))

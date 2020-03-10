@@ -29,4 +29,20 @@
     (counsel-projectile-mode 1)
     ))
 
+(use-package all-the-icons)
+
+;; Better experience with icons
+;; Enable it before`ivy-rich-mode' for better performance
+(use-package all-the-icons-ivy-rich
+  :hook (ivy-mode . all-the-icons-ivy-rich-mode))
+
+;; More friendly display transformer for Ivy
+(use-package ivy-rich
+  :hook (;; Must load after `counsel-projectile'
+         (counsel-projectile-mode . ivy-rich-mode)
+         (ivy-rich-mode . (lambda ()
+                            "Use abbreviate in `ivy-rich-mode'."
+                            (setq ivy-virtual-abbreviate
+                                  (or (and ivy-rich-mode 'abbreviate) 'name))))))
+
 (provide 'ohai-ivy)

@@ -37,9 +37,9 @@
 (defun ohai-appearance/light ()
   "Apply light style."
   (interactive)
-  (use-package poet-theme
+  (use-package doom-themes
     :config
-    (load-theme 'poet t)
+    (load-theme 'doom-solarized-light t)
     (set-face-attribute 'font-lock-type-face nil :slant 'italic)
     (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
     (set-face-attribute 'line-number nil :height 0.5)

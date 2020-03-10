@@ -6,16 +6,17 @@
 
 
 ;;; Code:
-
+(require 'composite)
 (use-package composite
   :ensure nil
-  :init
-  (defvar composition-ligature-table (make-char-table nil))
   :hook
-  (((prog-mode conf-mode nxml-mode markdown-mode help-mode)
-    . (lambda () (setq-local composition-function-table composition-ligature-table))))
+  (((prog-mode conf-mode nxml-mode markdown-mode help-mode) .
+    (lambda () (setq-local composition-function-table composition-ligature-table)))
+   (prog-mode . auto-composite-mode)
+   )
   :config
   ;; support ligatures, some toned down to prevent hang
+  (global-auto-complete-mode -1)
   (when (version<= "27.0" emacs-version)
     (let ((alist
            '((33 . ".\\(?:\\(==\\|[!=]\\)[!=]?\\)")
@@ -48,9 +49,9 @@
              (124 . ".\\(?:\\(->\\|=>\\||[-=>]\\||||*>\\|[]=>|}-]\\).?\\)")
              (126 . ".\\(?:\\(~>\\|[-=>@~]\\)[-=>@~]?\\)"))))
       (dolist (char-regexp alist)
-        (set-char-table-range composition-ligature-table (car char-regexp)
+        (set-char-table-range composition-function-table (car char-regexp)
                               `([,(cdr char-regexp) 0 font-shape-gstring]))))
-    (set-char-table-parent composition-ligature-table composition-function-table))
+    )
   )
 (provide 'ohai-ligatures)
 ;;; ohai-ligatures.el ends here

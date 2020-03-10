@@ -37,9 +37,9 @@
 ;; to use MELPA as well.
 (setq package-user-dir (concat dotfiles-dir "elpa"))
 (require 'package)
-(setq package-archives '(("elpa" . "https://elpa.gnu.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")
-                         ("org" . "http://orgmode.org/elpa/")))
+(setq package-archives '(("elpa" . "https://mirrors.163.com/elpa/elpa/")
+                         ("melpa" . "https://mirrors.163.com/elpa/melpa/")
+                         ("org" . "https://mirrors.163.com/elpa/org/")))
 
 ;; To get the package manager going, we invoke its initialise function.
 ;(package-initialize)

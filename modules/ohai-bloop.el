@@ -154,5 +154,4 @@
 (global-set-key (kbd "C-c b q") 'bloop-show-current-project)
 
 (provide 'ohai-bloop)
-
 ;;; ohai-bloop.el ends here
