@@ -37,7 +37,7 @@
 ;; to use MELPA as well.
 (setq package-user-dir (concat dotfiles-dir "elpa"))
 (require 'package)
-(setq package-archives '(("elpa" . "https://mirrors.163.com/elpa/elpa/")
+(setq package-archives '(("elpa" . "https://mirrors.163.com/elpa/gnu/")
                          ("melpa" . "https://mirrors.163.com/elpa/melpa/")
                          ("org" . "https://mirrors.163.com/elpa/org/")))
 
