@@ -31,10 +31,8 @@
 (use-package dash)
 
 
-
 (defun ohai/font-lock-replace-symbol (mode reg sym)
-  "Given a major mode `mode', replace the regular expression `reg' with
-the symbol `sym' when rendering."
+  "Given a major `MODE', replace the regular expression `REG' with the symbol `SYM' when rendering."
   (font-lock-add-keywords
    mode `((,reg
            (0 (progn (compose-region (match-beginning 1) (match-end 1)
@@ -43,7 +41,7 @@ the symbol `sym' when rendering."
 
 
 (defun ohai/exec (command)
-  "Run a shell command and return its output as a string, whitespace trimmed."
+  "Run a shell `COMMAND' and return its output as a string, whitespace trimmed."
   (s-trim (shell-command-to-string command)))
 
 (defun ohai/exec-with-rc (command &rest args)
@@ -88,6 +86,7 @@ as opposed to empty strings."
   "Guess the user's email address. Returns nil if none could be found."
   (or (ohai/exec-if-exec "git" "config --get user.email")
       (getenv "EMAIL")))
+
 
 
 

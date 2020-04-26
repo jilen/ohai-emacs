@@ -35,11 +35,10 @@
   (require 'ox-latex)
   (add-to-list 'org-latex-classes
                '("beamer"
-                 "\\documentclass\[presentation\]\{beamer\}
+                 "\\documentclass\{beamer\}
                  \[NO-DEFAULT-PACKAGES]
                  \[PACKAGES]
-                 \[EXTRA]
-                 \\usepackage{default}"
+                 \[EXTRA]"
                  ("\\section\{%s\}" . "\\section*\{%s\}")
                  ("\\subsection\{%s\}" . "\\subsection*\{%s\}")
                  ("\\subsubsection\{%s\}" . "\\subsubsection*\{%s\}")))

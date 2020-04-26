@@ -68,7 +68,8 @@
                    name (file-name-nondirectory new-name)))))))
 (global-set-key (kbd "C-x C-r") 'rename-current-buffer-file)
 
-
+(use-package all-the-icons-dired
+  :hook (dired-mode . all-the-icons-dired-mode))
 
 (provide 'ohai-dired)
 ;;; ohai-dired.el ends here

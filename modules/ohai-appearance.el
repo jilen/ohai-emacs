@@ -24,6 +24,15 @@
 (require 'ohai-personal-taste)
 (require 'term)
 
+(defun font-installed-p (font-name)
+  "Check if font with FONT-NAME is available."
+  (find-font (font-spec :name font-name)))
+
+;; Specify font for Chinese characters
+(cl-loop for font in '("Sarasa Mono Slab SC" "Source Han Serif" "Microsoft Yahei")
+         when (font-installed-p font)
+         return (set-fontset-font t '(#x4e00 . #x9fff) font))
+
 ;; Get rid of the training wheels, if you're ready for it.
 (when (not ohai-personal-taste/training-wheels)
   (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
@@ -39,12 +48,12 @@
   (interactive)
   (use-package doom-themes
     :config
-    (load-theme 'doom-solarized-light t)
+    (load-theme 'doom-solarized-light  t)
     (set-face-attribute 'font-lock-type-face nil :slant 'italic)
     (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
-    (set-face-attribute 'line-number nil :height 0.5)
-    (set-face-attribute 'line-number-current-line nil :height 0.5)
-    (set-face-attribute 'fringe nil :height 0.5
+    (set-face-attribute 'line-number nil :height 0.6)
+    (set-face-attribute 'line-number-current-line nil :height 0.6)
+    (set-face-attribute 'fringe nil :height 0.6
                         :foreground (face-foreground 'default)
                         :background (face-background 'default))
     (let ((line (face-attribute 'mode-line :underline)))
@@ -63,12 +72,6 @@
 (with-eval-after-load "web-mode"
   (set-face-attribute 'web-mode-current-element-highlight-face nil
                       :background (face-background 'highlight)))
-
-  ;; (use-package spaceline
-  ;;   :config
-  ;;   (setq powerline-height 24)
-  ;;   (require 'spaceline-config)
-  ;;   (spaceline-emacs-theme))
 
 (use-package doom-modeline
   :ensure t
@@ -187,7 +190,7 @@
 
 
 (set-face-attribute 'default nil
-                    :height 130)
+                    :height 140)
 
 (provide 'ohai-appearance)
 ;;; ohai-appearance.el ends here

@@ -6,7 +6,14 @@
 
 ;;; Code:
 
-(defun setup-charp ()
+
+(use-package csharp-mode)
+
+(eval-after-load
+  'company
+  '(add-to-list 'company-backends #'company-omnisharp))
+
+(defun my-csharp-mode-setup ()
   (omnisharp-mode)
   (company-mode)
   (flycheck-mode)
@@ -26,14 +33,12 @@
   (local-set-key (kbd "C-c r r") 'omnisharp-run-code-action-refactoring)
   (local-set-key (kbd "C-c C-c") 'recompile))
 
+
 (use-package omnisharp
   :config
   :hook
   (('charp-mode-hook #'omnisharp-mode)
-   ('charp-mode-hook #'company-mode)
-   ('charp-mode-hook #'flycheck-mode)
-   ('charp-mode-hook 'setup-charp)
-   ))
+   ('charp-mode-hook #'my-csharp-mode-setup)))
 
 
 
