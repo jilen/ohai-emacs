@@ -35,6 +35,7 @@
 
   :hook (after-init . projectile-mode)
   :init
+  (setq projectile-enable-caching t)
   (setq projectile-mode-line-prefix "")
   (setq projectile-use-git-grep t))
 
