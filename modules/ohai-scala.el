@@ -6,10 +6,10 @@
 ;;; Code:
 
 (require 'ohai-lib)
-
+(require 'ohai-bloop)
 (use-package scala-mode
   :config
-  (setq-default sbt:program-options '("-Djline.terminal=none" "-Dsbt.supershell=false"))
+  (setq-default sbt:program-options '("-Djline.terminal=none" "-Dsbt.supershell=false" "-Dquill.macro.log=false"))
   (setq-default scala-indent:use-javadoc-style t))
 
 (use-package sbt-mode
@@ -31,7 +31,7 @@
 (defun sbt-compile ()
   "Compile sbt project."
   (interactive)
-  (sbt-command "test:compile")
+  (sbt-command "compile")
   )
 
 (require 'sbt-mode-project)
@@ -69,11 +69,10 @@
 
 (global-set-key (kbd "C-c b f") 'format-project)
 (global-set-key (kbd "C-c b b") 'bloop-compile)
-(global-set-key (kbd "C-c b t") 'bloop-test-only)
+(global-set-key (kbd "C-c b t") 'boop-test-only)
 
 (define-derived-mode sbt-build-mode scala-mode ".sbt")
 (add-to-list 'auto-mode-alist '("\\.sbt\\'" . sbt-build-mode))
-(require 'ohai-bloop)
 
 (provide 'ohai-scala)
 

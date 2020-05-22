@@ -16,7 +16,7 @@
 (add-hook 'prog-mode-hook #'enable-composite)
 (add-hook 'xml-mode #'enable-composite)
 
-(global-auto-complete-mode -1)
+(global-auto-composition-mode -1)
 
 (when (version<= "27.0" emacs-version)
   (let ((alist
