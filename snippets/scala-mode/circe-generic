@@ -3,5 +3,4 @@
 # key: icg
 # --
 
-import io.circe.generic._
-import zd.common.utils.CirceCodecs._
+import io.circe.derivation.annotations._

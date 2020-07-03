@@ -48,12 +48,12 @@
   (interactive)
   (use-package doom-themes
     :config
-    (load-theme 'doom-solarized-light  t)
+    (load-theme 'doom-solarized-light t)
     (set-face-attribute 'font-lock-type-face nil :slant 'italic)
     (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
-    (set-face-attribute 'line-number nil :height 0.6)
-    (set-face-attribute 'line-number-current-line nil :height 0.6)
-    (set-face-attribute 'fringe nil :height 0.6
+    (set-face-attribute 'line-number nil :height 0.8)
+    (set-face-attribute 'line-number-current-line nil :height 0.8)
+    (set-face-attribute 'fringe nil :height 0.8
                         :foreground (face-foreground 'default)
                         :background (face-background 'default))
     (let ((line (face-attribute 'mode-line :underline)))
