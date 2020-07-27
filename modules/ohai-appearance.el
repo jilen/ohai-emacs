@@ -29,7 +29,7 @@
   (find-font (font-spec :name font-name)))
 
 ;; Specify font for Chinese characters
-(cl-loop for font in '("Sarasa Mono Slab SC" "Source Han Serif" "Microsoft Yahei")
+(cl-loop for font in '("Source Han Serif" "Microsoft Yahei")
          when (font-installed-p font)
          return (set-fontset-font t '(#x4e00 . #x9fff) font))
 
@@ -48,7 +48,7 @@
   (interactive)
   (use-package doom-themes
     :config
-    (load-theme 'doom-solarized-light t)
+    (load-theme 'doom-one-light t)
     (set-face-attribute 'font-lock-type-face nil :slant 'italic)
     (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
     (set-face-attribute 'line-number nil :height 0.8)
@@ -56,12 +56,6 @@
     (set-face-attribute 'fringe nil :height 0.8
                         :foreground (face-foreground 'default)
                         :background (face-background 'default))
-    (let ((line (face-attribute 'mode-line :underline)))
-      (set-face-attribute 'mode-line          nil :overline   line)
-      (set-face-attribute 'mode-line-inactive nil :overline   line)
-      (set-face-attribute 'mode-line-inactive nil :underline  line)
-      (set-face-attribute 'mode-line          nil :box        nil)
-      (set-face-attribute 'mode-line-inactive nil :box        nil))
     (run-hooks 'ohai-appearance/hook)
     (run-hooks 'ohai-appearance/light-hook)))
 
@@ -75,12 +69,9 @@
 
 (use-package doom-modeline
   :ensure t
-  :config
-  (setq doom-modeline-height 25)
-  (setq doom-modeline-bar-width 3)
-  (setq doom-modeline-buffer-file-name-style 'truncate-upto-project)
-  (setq inhibit-compacting-font-caches t)
-  :hook (after-init . doom-modeline-mode))
+  :init
+  (doom-modeline-mode 1)
+)
 
 ;;Configure the dark colour scheme.
 (defun ohai-appearance/dark ()
@@ -191,6 +182,9 @@
 
 (set-face-attribute 'default nil
                     :height 140)
+
+(use-package color-identifiers-mode
+  :hook (after-init . global-color-identifiers-mode))
 
 (provide 'ohai-appearance)
 ;;; ohai-appearance.el ends here

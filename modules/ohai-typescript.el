@@ -8,14 +8,12 @@
 (defun setup-flycheck ()
   "Init checkers."
   (with-eval-after-load 'flycheck
-    (setq lsp-prefer-flymake t)
     (advice-add 'flycheck-eslint-config-exists-p :override (lambda() t))
     (flycheck-add-mode 'javascript-eslint 'typescript-mode)))
 
-(use-package lsp-mode)
-(use-package lsp-ui)
-(use-package company-lsp)
-(setq company-lsp-cache-candidates t)
+(use-package lsp-mode
+  :hook ((typescript-mode . lsp)))
+
 (use-package add-node-modules-path)
 (use-package typescript-mode
   :after (flycheck)

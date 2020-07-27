@@ -25,6 +25,7 @@
 (set-keyboard-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 (load-library "iso-transl")
+(setq shell-file-name "/bin/bash")
 
 ;; Always ask for y/n keypress instead of typing out 'yes' or 'no'
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -55,5 +56,6 @@
 ;; Make compilation buffers scroll to follow the output, but stop scrolling
 ;; at the first error.
 (setq compilation-scroll-output 'first-error)
+(setq read-process-output-max (* 1024 1024))
 
 (provide 'ohai-general)

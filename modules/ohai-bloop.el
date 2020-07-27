@@ -32,6 +32,7 @@
   :group 'bloop)
 
 (defun bloop-buffer-name (root command)
+  "ROOT project root, COMMAND command to run."
   (concat "*bloop-" command "*"))
 
 (defun bloop-directory (root)
